@@ -1,0 +1,142 @@
+/* main_header css start*/
+.main_container {
+  background-image: url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  height: 800px;
+  background-position: center;
+  position: relative;
+}
+.main_container nav {
+  background-color: #1c1c1c;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+}
+
+.main_container h1 {
+  color: white;
+  font-size: 5rem;
+  position: absolute;
+  top: 30%;
+  left: 10%;
+}
+.main_container h2 {
+  padding: 20px 40px 20px 40px;
+  font-size: 3rem;
+  display: inline-block;
+}
+.main_container h2 a {
+  text-decoration: none;
+  color: #fc0000;
+  width: inherit;
+}
+.main_container p {
+  color: white;
+  top: 45%;
+  line-height: 40px;
+  position: absolute;
+  left: 10%;
+  font-size: 1.5rem;
+}
+.main_container img {
+  width: 290px;
+  position: absolute;
+  border-radius: 20px;
+  box-shadow: 0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
+}
+.main_container img:nth-of-type(1) {
+  width: 260px;
+  right: 10%;
+  top: 32%;
+}
+.main_container img:nth-of-type(2) {
+  right: 20%;
+  top: 35%;
+  z-index: 9;
+}
+.main_container img:nth-of-type(3) {
+  width: 260px;
+  right: 30%;
+  top: 32%;
+}
+
+/* search_box css start */
+form.search_box {
+  height: 50px;
+  display: inline-block;
+  position: absolute;
+  top: 60%;
+  left: 10%;
+}
+.search_box input,
+.search_box button {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(155, 155, 155, 0.589);
+  color: white;
+  border-radius: 5px;
+  height: inherit;
+  font-size: 20px;
+}
+.search_box input {
+  width: 500px;
+  padding-left: 30px;
+}
+.search_box input:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.search_box button {
+  width: 70px;
+  cursor: pointer;
+}
+
+/* section movie-card css start */
+section h2 {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 90px;
+}
+#movie-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  max-width: 1900px;
+  margin: 0 auto;
+  padding-top: 80px;
+}
+
+.movie-card {
+  margin: 30px;
+  width: 400px;
+  justify-self: center;
+  cursor: pointer;
+  box-shadow: 0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  overflow: hidden;
+  border-radius: 15px;
+  transition: 1s;
+  margin-bottom: 100px;
+}
+
+.movie-card img {
+  width: 100%;
+}
+.movie-card .text_area {
+  padding: 24px;
+  color: white;
+}
+.movie-card .text_area h3 {
+  font-size: 1.3rem;
+}
+.movie-card .text_area p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 1rem;
+  padding-top: 10px;
+}
