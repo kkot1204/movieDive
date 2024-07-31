@@ -1,0 +1,74 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-right: 3rem;
+}
+
+#logoutButton {
+  border: none;
+  background: transparent;
+  width: 8rem;
+  height: 3rem;
+  color: white;
+  font-size: 1.3rem;
+}
+
+#moveToMyMoviesButton {
+  width: 4rem;
+  height: 4rem;
+  background-color: red;
+  border: none;
+}
+
+.interestMovies {
+  margin: 8rem 5rem;
+  font-size: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.interestMovies > div {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(15%, auto));
+  margin-bottom: 8rem;
+}
+
+/* movie card */
+.movie-card {
+  margin: 30px;
+  width: 300px;
+  justify-self: center;
+  cursor: pointer;
+  box-shadow:
+    0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.movie-card img {
+  width: 100%;
+}
+.movie-card .text_area {
+  padding: 24px;
+  color: white;
+}
+.movie-card .text_area h3 {
+  font-size: 1.3rem;
+}
+.movie-card .text_area p {
+  overflow: hidden;
+  font-size: 1rem;
+  padding-top: 10px;
+}
