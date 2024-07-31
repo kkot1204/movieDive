@@ -137,13 +137,12 @@ table {
   height: 88px;
   background-position: center;
   position: relative;
-}
-#header nav {
   background-color: #1c1c1c;
   position: fixed;
   width: 100%;
-  z-index: 99999;
+  z-index: 99999; /* 어딜 넣어도 무조건 앞쪽에 위치 */
 }
+
 #header h2 {
   padding: 20px 40px 20px 40px;
   font-size: 3rem;

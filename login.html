@@ -1,24 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kor">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/login.css" />
   </head>
 
   <body>
     <header id="header">
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
+        <button>로그인</button>
+        <button type="submit">회원가입</button>
       </nav>
     </header>
 
-    <section style="text-align: center">
-      <h2>로그인</h2>
+    <section>
+      <div class="loginContainer">
+        <tr>
+          <td><h2>로그인</h2></td>
+        </tr>
+        <tr>
+          <td><input type="text" class="loginID" placeholder="ID (example@gmail.com)" /></td>
+        </tr>
+        <tr>
+          <td><input type="password" class="loginPassword" placeholder="Password" /></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /> 로그인 정보 저장</td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="로그인" class="loginButton" onclick="alert('로그인 성공')" /></td>
+        </tr>
+      </div>
     </section>
 
     <script src="js/movie.js"></script>
-    <script src="js/login.js"></script>
+    <script type="module" src="js/login.js"></script>
   </body>
 </html>
