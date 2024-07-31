@@ -12,16 +12,19 @@
     <header id="header">
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
-        <button>로그인</button>
-        <button type="submit">회원가입</button>
+        <div class="navButtons">
+          <button>로그인</button>
+          <button type="submit" id="signUpButton">회원가입</button>
+        </div>
       </nav>
     </header>
 
     <section>
-      <div class="loginContainer">
-        <tr>
-          <td><h2>로그인</h2></td>
-        </tr>
+      <form class="loginContainer">
+        <div class="loginWarp">
+          <h3>로그인</h3>
+          <p>비밀번호를 잊어버리셨나요?</p>
+        </div>
         <tr>
           <td><input type="text" class="loginID" placeholder="ID (example@gmail.com)" /></td>
         </tr>
@@ -34,7 +37,7 @@
         <tr>
           <td><input type="submit" value="로그인" class="loginButton" onclick="alert('로그인 성공')" /></td>
         </tr>
-      </div>
+      </form>
     </section>
 
     <script src="js/movie.js"></script>
