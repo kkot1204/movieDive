@@ -140,7 +140,18 @@ table {
   background-color: #1c1c1c;
   position: fixed;
   width: 100%;
-  z-index: 99999; /* 어딜 넣어도 무조건 앞쪽에 위치 */
+  z-index: 99999;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navButtons {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-right: 3rem;
 }
 
 #header h2 {
