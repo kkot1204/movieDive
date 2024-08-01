@@ -44,7 +44,9 @@
   width: 290px;
   position: absolute;
   border-radius: 20px;
-  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow:
+    0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
 }
 .main_container img:nth-of-type(1) {
   width: 260px;
@@ -112,7 +114,9 @@ section h2 {
   width: 400px;
   justify-self: center;
   cursor: pointer;
-  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow:
+    0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
   transition: 1s;
@@ -137,4 +141,18 @@ section h2 {
   -webkit-box-orient: vertical;
   font-size: 1rem;
   padding-top: 10px;
+}
+
+#moveToMyMoviesButton {
+  width: 56px;
+  height: 56px;
+  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: none;
+  border-radius: 8%;
+
+  cursor: pointer;
 }
