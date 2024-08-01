@@ -12,6 +12,8 @@
   height: 4rem;
   background-color: red;
   border: none;
+
+  cursor: pointer;
 }
 
 .interestMovies {
