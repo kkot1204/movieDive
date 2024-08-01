@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="kor">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/signup.css" />
+  </head>
+
+  <body>
+    <header id="header">
+      <nav>
+        <h2><a href="index.html">Top Movie</a></h2>
+        <div class="navButtons">
+          <button>로그인</button>
+        </div>
+      </nav>
+    </header>
+
+    <section>
+      <form class="signUpContainer">
+        <div><h2>회원가입</h2></div>
+        <div><input type="email" id="signUpEmail" class="signUpEmail" placeholder="이메일 (example@gmail.com)" /></div>
+        <div>
+          <input
+            type="password"
+            id="signUpPassword"
+            class="signUpPassword"
+            placeholder="비밀번호 (영문, 숫자 조합 안해도 됨)"
+          />
+        </div>
+        <div id="signUpButton">
+          <input type="submit" value="가입하기" id="signUpButton" class="signUpButton" />
+        </div>
+      </form>
+    </section>
+
+    <script src="js/movie.js"></script>
+    <script type="module" src="js/signup.js"></script>
+  </body>
+</html>

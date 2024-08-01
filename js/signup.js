@@ -26,31 +26,20 @@ const signUpButton = document.querySelector("#signUpButton");
 
 signUpButton.addEventListener("click", (event) => {
   event.preventDefault();
-  const email = document.getElementById("loginID").value;
-  const password = document.getElementById("loginPassword").value;
-  console.log(email, password);
+  const email = document.getElementById("signUpEmail").value;
+  const password = document.getElementById("signUpPassword").value;
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      alert("회원가입 완료");
+      // Signed in
+      const user = userCredential.user;
+      window.location.reload();
+    })
+    .catch((error) => {
+      alert("이메일 주소 혹은 비밀번호를 다시 확인해주세요");
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
 });
-
-const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
-
-// import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-
-// const auth = getAuth();
-// signOut(auth)
-//   .then(() => {
-//     // Sign-out successful.
-//   })
-//   .catch((error) => {
-//     // An error happened.
-//   });

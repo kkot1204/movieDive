@@ -1,0 +1,58 @@
+section {
+  text-align: center;
+  height: 100vh;
+}
+
+.signUpContainer {
+  width: 280px;
+  height: 250px;
+  margin: auto;
+  font-size: 15px;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+.signUpContainer > h2 {
+  text-align: center;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.signUpName,
+.signUpEmail,
+.signUpPassword {
+  width: 250px;
+  height: 32px;
+  margin: 5px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+}
+
+.signUpButton {
+  width: 263px;
+  height: 32px;
+  margin: 5px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  color: white;
+  background-color: #ca0000;
+}
+
+.signUpButton:active {
+  width: 263px;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: #ca000096;
+}
