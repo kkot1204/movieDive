@@ -19,17 +19,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth();
 
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
 const signUpButton = document.querySelector("#signUpButton");
-
 signUpButton.addEventListener("click", (event) => {
   event.preventDefault();
-  const email = document.getElementById("signUpEmail").value;
-  const password = document.getElementById("signUpPassword").value;
-  const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
+  const signUpEmail = document.getElementById("signUpEmail").value;
+  const signUpPassword = document.getElementById("signUpPassword").value;
+
+  createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
     .then((userCredential) => {
       alert("회원가입 완료");
       // Signed in

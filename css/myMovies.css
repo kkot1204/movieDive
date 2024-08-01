@@ -1,0 +1,74 @@
+#logoutButton {
+  border: none;
+  background: transparent;
+  width: 120px;
+  height: 48px;
+  line-height: 48px;
+  color: white;
+  font-size: 1.3rem;
+}
+
+#moveToMyMoviesButton {
+  width: 56px;
+  height: 56px;
+  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: none;
+  border-radius: 8%;
+
+  cursor: pointer;
+}
+
+.interestMovies {
+  margin: 12rem auto;
+  font-size: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  width: 90%;
+}
+
+.interestMovies > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 8rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* movie card */
+.movie-card {
+  margin: 30px;
+  width: 300px;
+  justify-self: center;
+  cursor: pointer;
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
+  overflow: hidden;
+  border-radius: 15px;
+
+  flex-grow: 0;
+}
+
+.movie-card img {
+  width: 100%;
+}
+.movie-card .text_area {
+  padding: 24px;
+  color: white;
+}
+.movie-card .text_area h3 {
+  font-size: 1.3rem;
+}
+.movie-card .text_area p {
+  overflow: hidden;
+  font-size: 1rem;
+  padding-top: 10px;
+}

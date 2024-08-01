@@ -13,10 +13,10 @@ section {
   transform: translateY(-50%);
 }
 
-.signUpContainer > h2 {
+.signUpContainer h3 {
   text-align: center;
-  margin-left: 10px;
   font-size: 20px;
+  padding: 10px;
 }
 
 .signUpName,

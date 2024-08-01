@@ -19,38 +19,26 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-
-const signUpButton = document.querySelector("#signUpButton");
-
-signUpButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const email = document.getElementById("loginID").value;
-  const password = document.getElementById("loginPassword").value;
-  console.log(email, password);
-});
-
 const auth = getAuth();
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in
-    const user = userCredential.user;
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // ..
-  });
 
-// import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
-// const auth = getAuth();
-// signOut(auth)
-//   .then(() => {
-//     // Sign-out successful.
-//   })
-//   .catch((error) => {
-//     // An error happened.
-//   });
+const logInButton = document.querySelector("#loginButton");
+logInButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  const loginID = document.getElementById("loginID").value;
+  const loginPassword = document.getElementById("loginPassword").value;
+
+  signInWithEmailAndPassword(auth, loginID, loginPassword)
+    .then((userCredential) => {
+      // Signed in
+      console.log(userCredential);
+      const user = userCredential.user;
+    })
+    .catch((error) => {
+      alert("로그인 정보가 일치하지 않습니다.");
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+});
