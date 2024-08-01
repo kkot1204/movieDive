@@ -8,10 +8,15 @@
 }
 
 #moveToMyMoviesButton {
-  width: 4rem;
-  height: 4rem;
-  background-color: red;
+  width: 56px;
+  height: 56px;
+  background: url(https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   border: none;
+  border-radius: 8%;
 
   cursor: pointer;
 }
