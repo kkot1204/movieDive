@@ -40,8 +40,6 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 8rem;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 /* movie card */
@@ -57,6 +55,8 @@
   border-radius: 15px;
 
   flex-grow: 0;
+
+  position: relative;
 }
 
 .movie-card img {
@@ -73,4 +73,24 @@
   overflow: hidden;
   font-size: 1rem;
   padding-top: 10px;
+}
+
+.saveButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.savedButton {
+  font-variation-settings:
+    "FILL" 100,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
