@@ -41,7 +41,7 @@ strong,
 sub,
 sup,
 tt,
-var,
+let,
 b,
 u,
 i,
@@ -137,8 +137,6 @@ table {
   height: 88px;
   background-position: center;
   position: relative;
-}
-#header nav {
   background-color: #1c1c1c;
   position: fixed;
   width: 100%;
