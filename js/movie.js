@@ -1,16 +1,17 @@
+import { setToMyMoviesButtonEvent } from "./myMovies.js";
+
 const options = {
   method: "GET",
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YjJlOWIyZWNkMmI1MDIwN2YzMWU2NzFhMDU3NzRmNSIsIm5iZiI6MTcyMTkxNjYxOC43MTM4NTgsInN1YiI6IjY2YTI1YWMxY2EyMzA4N2I0YWNmODgwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k8F1VMfOMPodILUqqlXGQXrOEgkbQGiJ8w_vnWFM_nE",
-  },
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YjJlOWIyZWNkMmI1MDIwN2YzMWU2NzFhMDU3NzRmNSIsIm5iZiI6MTcyMTkxNjYxOC43MTM4NTgsInN1YiI6IjY2YTI1YWMxY2EyMzA4N2I0YWNmODgwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k8F1VMfOMPodILUqqlXGQXrOEgkbQGiJ8w_vnWFM_nE"
+  }
 };
 
 function getMovieData(searchText) {
   console.log("sss", searchText);
-  let url =
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+  let url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
 
   // 검색어가 있을 경우에는 검색 관련 url을 붙여준다.
   if (searchText) {
@@ -74,3 +75,6 @@ document.querySelector(".searchInput").addEventListener("keydown", (event) => {
     getMovieData(query);
   }
 });
+
+// myMovie 페이지로 이동할 수 있는 버튼 이벤트 설정
+setToMyMoviesButtonEvent();
