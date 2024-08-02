@@ -1,48 +1,33 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import "./firebase-init.js";
+import { auth } from "./firebase-init.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
-  authDomain: "movieaccount-3d409.firebaseapp.com",
-  projectId: "movieaccount-3d409",
-  storageBucket: "movieaccount-3d409.appspot.com",
-  messagingSenderId: "942641611452",
-  appId: "1:942641611452:web:864f3cd1c0918cfe14c6b9",
-  measurementId: "G-E97WVRRBKZ"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-
-const logInButton = document.querySelector("#loginButton");
-logInButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const loginID = document.getElementById("loginID").value;
-  const loginPassword = document.getElementById("loginPassword").value;
-
-  signInWithEmailAndPassword(auth, loginID, loginPassword)
-    .then((userCredential) => {
-      // Signed in
-      console.log(userCredential);
-      const user = userCredential.user;
-    })
-    .catch((error) => {
-      alert("로그인 정보가 일치하지 않습니다.");
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-});
-
-// 회원가입 버튼 클릭시 login page 로 이동
 document.addEventListener("DOMContentLoaded", () => {
+  const logInButton = document.querySelector("#loginButton");
+
+  if (logInButton) {
+    // if문으로 로그인 버튼이 존재하는지 확인. 없으면 null, 안정성 감소
+    logInButton.addEventListener("click", (event) => {
+      event.preventDefault(); // 페이지가 새로고침 되는 것을 방지
+      const loginID = document.getElementById("loginID").value;
+      const loginPassword = document.getElementById("loginPassword").value;
+      // 이메일과 비밀번호 입력 시 로그인 auth 는 인증 객체
+      signInWithEmailAndPassword(auth, loginID, loginPassword)
+        .then((userCredential) => {
+          // 로그인 정보를 가져오고 성공 시 index.html 로 이동
+          //Firebase 인증 메서드가 성공적으로 완료됐을 때 반환되는 객체 userCredential
+          const user = userCredential.user;
+          window.location.href = "/index.html";
+        })
+        .catch((error) => {
+          alert("로그인 정보가 일치하지 않습니다.");
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    });
+  }
+  // 회원가입 버튼 클릭 시 회원가입 페이지로 이동
   const signupButton = document.querySelector(".moveToSignUpPageButton");
   if (signupButton) {
     signupButton.addEventListener("click", () => {
@@ -50,4 +35,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-console.log(signupButton);

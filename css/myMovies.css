@@ -1,12 +1,9 @@
-#logoutButton {
-  border: none;
-  background: transparent;
+/* #logoutButton {
   width: 120px;
   height: 48px;
   line-height: 48px;
-  color: white;
   font-size: 1.3rem;
-}
+} */
 
 #moveToMyMoviesButton {
   width: 56px;

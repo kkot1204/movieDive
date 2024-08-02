@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,7 +29,11 @@
         </div>
         <div><input type="text" id="loginID" class="loginID" placeholder="ID (example@gmail.com)" /></div>
         <div><input type="password" id="loginPassword" class="loginPassword" placeholder="Password" /></div>
-        <div><input type="checkbox" /> 로그인 정보 저장</div>
+        <div class="checkbox">
+          <input type="checkbox" />
+          <p>로그인 정보 저장</p>
+          <span>도 안돼용~</span>
+        </div>
         <div><input type="submit" value="로그인" id="loginButton" class="loginButton" /></div>
       </form>
     </section>
@@ -37,5 +41,6 @@
     <script src="js/movie.js"></script>
     <script type="module" src="js/login.js"></script>
     <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>

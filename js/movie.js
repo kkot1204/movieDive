@@ -1,4 +1,6 @@
 import { setToMyMoviesButtonEvent } from "./myMovies.js";
+import "./firebase-init.js"; // Firebase 초기화
+import "./logoutstatus.js"; // 로그아웃 상태 관리를 위한 스크립트 추가
 
 const options = {
   method: "GET",
@@ -79,21 +81,21 @@ document.querySelector(".searchInput").addEventListener("keydown", (event) => {
 // myMovie 페이지로 이동할 수 있는 버튼 이벤트 설정
 setToMyMoviesButtonEvent();
 
-// 로그인 버튼 클릭시 login page 로 이동
-document.addEventListener("DOMContentLoaded", () => {
-  const loginButton = document.querySelector(".moveToLoginPageButton"); //
+/* 재헌 추가 시작 부분 */
+document.addEventListener("DOMContentLoaded", function () {
+  const loginButton = document.querySelector(".moveToLoginPageButton");
+  const signUpButton = document.querySelector(".moveToSignUpPageButton");
+
+  // 로그인 및 회원가입 버튼 이벤트 리스너 설정
   if (loginButton) {
     loginButton.addEventListener("click", () => {
       window.location.href = "login.html";
     });
-    const signupButton = document.querySelector(".moveToSignUpPageButton");
-    if (signupButton) {
-      signupButton.addEventListener("click", () => {
-        console.log(1);
-        window.location.href = "signup.html";
-      });
-    }
+  }
+
+  if (signUpButton) {
+    signUpButton.addEventListener("click", () => {
+      window.location.href = "signup.html";
+    });
   }
 });
-console.log(signupButton);
-console.log(loginButton);
