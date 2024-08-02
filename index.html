@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="kor">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
 
-  <body>
-    <nav id="header">
-      <h2><a href="index.html">Top Movie</a></h2>
-    </nav>
-    <div class="main_container">
-      <h1>Top Rank Movie</h1>
-      <p>
-        You can see the movie ranking with the highest ratings.
-        <br />
-        Please search for the movie title below
-      </p>
-      <form class="search_box">
-        <input type="search" id="searchInput" class="searchInput" placeholder="search" />
-        <button type="button" id="search_btn">검색</button>
-      </form>
-      <img src="https://image.tmdb.org/t/p/w500/bX2xnavhMYjWDoZp1VM6VnU1xwe.jpg" alt="" />
-      <img src="https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg" alt="" />
-      <img src="https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg" alt="" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <nav id="header">
+    <h2><a href="index.html">Top Movie</a></h2>
+  </nav>
+  <div class="main_container">
+    <h1>Top Rank Movie</h1>
+    <p>
+      You can see the movie ranking with the highest ratings.
+      <br />
+      Please search for the movie title below
+    </p>
+    <form class="search_box">
+      <input type="search" id="searchInput" class="searchInput" placeholder="search" />
+      <button type="button" id="search_btn">검색</button>
+    </form>
+    <img src="https://image.tmdb.org/t/p/w500/bX2xnavhMYjWDoZp1VM6VnU1xwe.jpg" alt="" />
+    <img src="https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg" alt="" />
+    <img src="https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg" alt="" />
+  </div>
+
+  <section>
+    <h2>Top Rank Movie</h2>
+    <!-- 최신순, 오래된 순, 별점 높은 순, 별점 낮은 순 -->
+    <div class="select">
+      <button class="select-wrap" onclick="select();">최신순</button>
+      <ul class="select-listbox">
+        <li><button class="select-list">최신순</button></li>
+        <li><button class="select-list">별점 높은 순</button></li>
+        <li><button class="select-list">별점 낮은 순</button></li>
+      </ul>
     </div>
+    <div id="movie-container">
+      <div id="movie-card" class="movie-card"></div>
+    </div>
+  </section>
 
-    <section>
-      <h2>Top Rank Movie</h2>
-      <div id="movie-container">
-        <div id="movie-card" class="movie-card"></div>
-      </div>
-    </section>
+  <script src="js/movie.js"></script>
+  <script type="module" src="js/login.js"></script>
+</body>
 
-    <script src="js/movie.js"></script>
-    <script type="module" src="js/login.js"></script>
-  </body>
 </html>
-
-test

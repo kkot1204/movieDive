@@ -92,12 +92,60 @@ form.search_box {
 }
 
 /* section movie-card css start */
+
 section h2 {
   color: white;
   text-align: center;
   font-size: 2rem;
   margin-top: 90px;
 }
+
+.select {
+  /* width: 100%; */
+  max-width: 1900px;
+  text-align: center;
+  margin: 80px auto 0 auto;
+}
+
+.select-wrap {
+  color: white;
+  width: 200px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 12px 13px;
+  font-size: 14px;
+  background: url(../img/Vector.png) 92% no-repeat; /*화살표 이미지 삽입*/
+  appearance: none;
+  text-align: center;
+}
+
+.select-listbox {
+  width: 200px;
+  list-style: none;
+  background: transparent;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  margin: 9px auto 0 auto;
+  /* display: none; */
+}
+
+.select-list {
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 7px 10px;
+  margin: 5px 7px;
+  box-sizing: border-box;
+}
+
 #movie-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
