@@ -9,18 +9,6 @@ export const setToMyMoviesButtonEvent = () => {
 
 setToMyMoviesButtonEvent();
 
-const saveButtons = document.querySelectorAll(".saveButton");
-/** 버튼에 영화 찜하기 이벤트 등록 */
-const setSaveMovieButtonEvent = () => {
-  saveButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      button.classList.toggle("savedButton");
-    });
-  });
-};
-
-// setSaveMovieButtonEvent();
-
 const userID = "c4JZesd1IXO1W2wHJyLDy46CMg52"; // 테스트용 ID, TODO: 추후 firebase auth에 id 관련 메서드 등 찾아서 적용
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
@@ -40,17 +28,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const docRef = doc(db, "user", `${userID}`);
 
-let saveMovieArray = [];
-let reviewMovieArray = [];
+let saveMovieIDArray;
+let reviewMovieIDArray;
+
+let saveMovieInfoArray = [];
+let reviewMovieInfoArray = [];
 
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
 const getUserMovies = async () => {
   try {
     let userInfo = await getDoc(docRef);
-    let userSaveMovies = userInfo.data().saveMovies;
-    let userReviewMovies = userInfo.data().reviewMovies;
+    saveMovieIDArray = userInfo.data().saveMovies;
+    reviewMovieIDArray = userInfo.data().reviewMovies;
 
-    for (let movieID of userSaveMovies) {
+    for (let movieID of saveMovieIDArray) {
       const url = `https://api.themoviedb.org/3/movie/${movieID}?`;
 
       let response = await fetch(url, options);
@@ -63,10 +54,10 @@ const getUserMovies = async () => {
         overview: response.overview
       };
 
-      saveMovieArray.push(movieData);
+      saveMovieInfoArray.push(movieData);
     }
 
-    for (let movieID of userReviewMovies) {
+    for (let movieID of reviewMovieIDArray) {
       const url = `https://api.themoviedb.org/3/movie/${movieID}?`;
       let response = await fetch(url, options);
       response = await response.json();
@@ -78,7 +69,7 @@ const getUserMovies = async () => {
         overview: response.overview
       };
 
-      reviewMovieArray.push(movieData);
+      reviewMovieInfoArray.push(movieData);
     }
   } catch (error) {
     console.log("error! ", error);
@@ -99,7 +90,7 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  saveMovieArray.forEach((movie) => {
+  saveMovieInfoArray.forEach((movie) => {
     const tempCard = document.createElement("div");
     tempCard.className = "movie-card";
     tempCard.id = movie.id;
@@ -116,15 +107,13 @@ async function showUserMovies() {
     tempButton.style.fontSize = "36px";
     tempButton.innerText = "favorite";
 
-    tempButton.addEventListener("click", (event) => {
-      event.currentTarget.classList.toggle("savedButton");
-    });
+    tempButton.addEventListener("click", saveButtonEvent);
 
     tempCard.appendChild(tempButton);
     savedMoviesSection.appendChild(tempCard);
   });
 
-  reviewMovieArray.forEach((movie) => {
+  reviewMovieInfoArray.forEach((movie) => {
     const tempCard = document.createElement("div");
     tempCard.className = "movie-card";
     tempCard.id = movie.id;
@@ -142,9 +131,7 @@ async function showUserMovies() {
     tempButton.style.fontSize = "36px";
     tempButton.innerText = "favorite";
 
-    tempButton.addEventListener("click", (event) => {
-      event.currentTarget.classList.toggle("savedButton");
-    });
+    tempButton.addEventListener("click", saveButtonEvent);
 
     tempCard.appendChild(tempButton);
     reviewedMoviesSection.appendChild(tempCard);
@@ -152,3 +139,18 @@ async function showUserMovies() {
 }
 
 showUserMovies();
+
+/** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
+const saveButtonEvent = (event) => {
+  event.currentTarget.classList.toggle("savedButton");
+  const selectedMovieID = event.currentTarget.parentElement.id;
+  if (event.currentTarget.classList.contains("savedButton")) {
+    // 찜한 경우
+    saveMovieIDArray.push(selectedMovieID);
+  } else {
+    // 찜 해제한 경우
+    saveMovieIDArray = saveMovieIDArray.filter((id) => id != selectedMovieID);
+  }
+
+  updateDoc(docRef, { saveMovies: saveMovieIDArray });
+};
