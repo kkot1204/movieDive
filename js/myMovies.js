@@ -107,7 +107,7 @@ async function showUserMovies() {
     </div>`;
 
     const tempButton = document.createElement("span");
-    tempButton.className = "material-symbols-outlined saveButton";
+    tempButton.className = "material-symbols-outlined saveButton saved";
     tempButton.style.fontSize = "36px";
     tempButton.innerText = "favorite";
 
@@ -146,9 +146,9 @@ showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 const saveButtonEvent = (event) => {
-  event.currentTarget.classList.toggle("savedButton");
+  event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
-  if (event.currentTarget.classList.contains("savedButton")) {
+  if (event.currentTarget.classList.contains("saved")) {
     // 찜한 경우
     saveMovieIDArray.push(selectedMovieID);
   } else {
