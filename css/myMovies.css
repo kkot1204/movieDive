@@ -65,12 +65,17 @@
 .movie-card .text_area {
   padding: 24px;
   color: white;
+  width: 250px;
 }
 .movie-card .text_area h3 {
   font-size: 1.3rem;
 }
 .movie-card .text_area p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 1rem;
   padding-top: 10px;
 }
