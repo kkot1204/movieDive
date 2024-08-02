@@ -78,3 +78,22 @@ document.querySelector(".searchInput").addEventListener("keydown", (event) => {
 
 // myMovie 페이지로 이동할 수 있는 버튼 이벤트 설정
 setToMyMoviesButtonEvent();
+
+// 로그인 버튼 클릭시 login page 로 이동
+document.addEventListener("DOMContentLoaded", () => {
+  const loginButton = document.querySelector(".moveToLoginPageButton"); //
+  if (loginButton) {
+    loginButton.addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+    const signupButton = document.querySelector(".moveToSignUpPageButton");
+    if (signupButton) {
+      signupButton.addEventListener("click", () => {
+        console.log(1);
+        window.location.href = "signup.html";
+      });
+    }
+  }
+});
+console.log(signupButton);
+console.log(loginButton);

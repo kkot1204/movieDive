@@ -45,10 +45,10 @@ signUpButton.addEventListener("click", (event) => {
 
 // 로그인 버튼 클릭시 signup page 로 이동
 document.addEventListener("DOMContentLoaded", () => {
-  const loginButton = document.querySelector(".moveToLoginPageButton"); // moveToLoginPageButton 클래스를 가진 버튼 선택
+  const loginButton = document.querySelector(".moveToLoginPageButton");
   if (loginButton) {
     loginButton.addEventListener("click", () => {
-      window.location.href = "login.html"; // login.html 페이지로 리다이렉트
+      window.location.href = "login.html";
     });
   }
 });
