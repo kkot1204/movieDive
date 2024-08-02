@@ -37,8 +37,6 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 8rem;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 /* movie card */
@@ -52,6 +50,8 @@
   border-radius: 15px;
 
   flex-grow: 0;
+
+  position: relative;
 }
 
 .movie-card img {
@@ -60,12 +60,38 @@
 .movie-card .text_area {
   padding: 24px;
   color: white;
+  width: 250px;
 }
 .movie-card .text_area h3 {
   font-size: 1.3rem;
 }
 .movie-card .text_area p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 1rem;
   padding-top: 10px;
+}
+
+.saveButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  user-select: none;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.savedButton {
+  font-variation-settings:
+    "FILL" 100,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }

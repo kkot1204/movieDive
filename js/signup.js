@@ -1,6 +1,6 @@
 import "./firebase-init.js";
 import { auth } from "./firebase-init.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
 // 회원가입 부분
 document.addEventListener("DOMContentLoaded", () => {
