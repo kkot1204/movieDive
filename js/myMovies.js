@@ -1,4 +1,7 @@
-// TODO: detail.html 에도 myMovies로 이동할 클릭 이벤트 추가
+import "./firebase-init.js";
+import "./logoutstatus.js";
+
+// TODO: index.html 에도 myMovies로 이동할 클릭 이벤트 추가
 const moveToMyMoviesButton = document.querySelector("#moveToMyMoviesButton");
 /** myMovies.html로 이동하는 버튼 이벤트 등록 */
 export const setToMyMoviesButtonEvent = () => {

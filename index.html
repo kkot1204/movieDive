@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="kor">
+<!DOCTYPE html>
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,10 @@
     <nav id="header">
       <h2><a href="index.html">Top Movie</a></h2>
       <div class="navButtons">
+        <button class="moveToLoginPageButton" type="button">로그인</button>
+        <button class="moveToSignUpPageButton" type="button">회원가입</button>
+
+        <button id="logoutButton" style="display: none">로그아웃</button>
         <button id="moveToMyMoviesButton" onClick="window.location.href=`./myMovies.html`"></button>
       </div>
     </nav>
@@ -40,5 +44,8 @@
 
     <script type="module" src="js/movie.js"></script>
     <script type="module" src="js/login.js"></script>
+    <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +13,7 @@
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
         <div class="navButtons">
-          <button>로그인</button>
-          <button type="submit" id="signUpButton">회원가입</button>
+          <button class="moveToSignUpPageButton" type="button">회원가입</button>
         </div>
       </nav>
     </header>
@@ -23,24 +22,25 @@
       <form class="loginContainer">
         <div class="loginWarp">
           <h3>로그인</h3>
-          <p>비밀번호를 잊어버리셨나요?</p>
+          <div class="passwordForgot">
+            <p>비밀번호를 잊어버리셨나요?</p>
+            <span>어쩔 수 없어용~</span>
+          </div>
         </div>
-        <tr>
-          <td><input type="text" class="loginID" placeholder="ID (example@gmail.com)" /></td>
-        </tr>
-        <tr>
-          <td><input type="password" class="loginPassword" placeholder="Password" /></td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" /> 로그인 정보 저장</td>
-        </tr>
-        <tr>
-          <td><input type="submit" value="로그인" class="loginButton" onclick="alert('로그인 성공')" /></td>
-        </tr>
+        <div><input type="text" id="loginID" class="loginID" placeholder="ID (example@gmail.com)" /></div>
+        <div><input type="password" id="loginPassword" class="loginPassword" placeholder="Password" /></div>
+        <div class="checkbox">
+          <input type="checkbox" />
+          <p>로그인 정보 저장</p>
+          <span>도 안돼용~</span>
+        </div>
+        <div><input type="submit" value="로그인" id="loginButton" class="loginButton" /></div>
       </form>
     </section>
 
     <script src="js/movie.js"></script>
     <script type="module" src="js/login.js"></script>
+    <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>

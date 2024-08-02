@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,21 +13,21 @@
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
         <div class="navButtons">
-          <button>로그인</button>
+          <button class="moveToLoginPageButton" type="button">로그인</button>
         </div>
       </nav>
     </header>
 
     <section>
       <form class="signUpContainer">
-        <div><h2>회원가입</h2></div>
+        <div><h3>회원가입</h3></div>
         <div><input type="email" id="signUpEmail" class="signUpEmail" placeholder="이메일 (example@gmail.com)" /></div>
         <div>
           <input
             type="password"
             id="signUpPassword"
             class="signUpPassword"
-            placeholder="비밀번호 (영문, 숫자 조합 안해도 됨)"
+            placeholder="비밀번호 (6자 이상, 조합 안해도 됨)"
           />
         </div>
         <div id="signUpButton">
@@ -37,6 +37,8 @@
     </section>
 
     <script src="js/movie.js"></script>
+    <script type="module" src="js/login.js"></script>
     <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>
