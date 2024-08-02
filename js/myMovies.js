@@ -5,6 +5,7 @@ import "./logoutstatus.js";
 const moveToMyMoviesButton = document.querySelector("#moveToMyMoviesButton");
 /** myMovies.html로 이동하는 버튼 이벤트 등록 */
 export const setToMyMoviesButtonEvent = () => {
+  if (!moveToMyMoviesButton) return;
   moveToMyMoviesButton.addEventListener("click", () => {
     window.location.href = `./myMovies.html`;
   });

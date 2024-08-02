@@ -12,16 +12,16 @@ document.addEventListener("DOMContentLoaded", function () {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       // 로그인 상태
-      loginButton.style.display = "none";
-      signUpButton.style.display = "none";
-      logoutButton.style.display = "block";
-      myMoviesButton.style.display = "block";
+      if (loginButton) loginButton.style.display = "none";
+      if (signUpButton) signUpButton.style.display = "none";
+      if (logoutButton) logoutButton.style.display = "block";
+      if (myMoviesButton) myMoviesButton.style.display = "block";
     } else {
       // 로그아웃 상태
-      loginButton.style.display = "block";
-      signUpButton.style.display = "block";
-      logoutButton.style.display = "none";
-      myMoviesButton.style.display = "none";
+      if (loginButton) loginButton.style.display = "block";
+      if (signUpButton) signUpButton.style.display = "block";
+      if (logoutButton) logoutButton.style.display = "none";
+      if (myMoviesButton) myMoviesButton.style.display = "none";
     }
   });
 
