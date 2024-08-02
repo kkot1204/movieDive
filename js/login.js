@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-analytics.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,10 +19,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth();
-
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
 const logInButton = document.querySelector("#loginButton");
 logInButton.addEventListener("click", (event) => {
@@ -42,3 +40,14 @@ logInButton.addEventListener("click", (event) => {
       // ..
     });
 });
+
+// 회원가입 버튼 클릭시 login page 로 이동
+document.addEventListener("DOMContentLoaded", () => {
+  const signupButton = document.querySelector(".moveToSignUpPageButton");
+  if (signupButton) {
+    signupButton.addEventListener("click", () => {
+      window.location.href = "signup.html";
+    });
+  }
+});
+console.log(signupButton);
