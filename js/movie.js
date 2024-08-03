@@ -39,18 +39,33 @@ function getMovieData(searchText) {
         let vote = i["vote_average"];
         let id = i["id"];
 
-        temp_html += `
-            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
-                <img src="${img_url}" alt="영화이미지">
-                <div class="text_area">
-                  <h3>${movie_title}</h3>
-                  <p>${overview}</p>
-                  <span>평점 : ${vote}</span>
-                </div>
-                
+        const tempCard = document.createElement("div");
+        tempCard.className = "movie-card";
+        tempCard.id = id;
+
+        tempCard.innerHTML = `
+            <img src="${img_url}" alt="영화이미지">
+            <div class="text_area">
+                <h3>${movie_title}</h3>
+                <p>${overview}</p>
+                <span>평점 : ${vote}</span>
             </div>
           `;
-        document.getElementById("movie-container").innerHTML = temp_html;
+
+        const tempButton = document.createElement("span");
+        tempButton.className = "material-symbols-outlined saveButton";
+
+        // if (saveMovieIDArray.includes(String(movie.id))) {
+        //   tempButton.classList.add("saved");
+        // }
+
+        tempButton.style.fontSize = "36px";
+        tempButton.innerText = "favorite";
+
+        // tempButton.addEventListener("click", saveButtonEvent);
+
+        tempCard.appendChild(tempButton);
+        document.getElementById("movie-container").appendChild(tempCard);
       });
     });
   });
