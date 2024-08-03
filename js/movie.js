@@ -1,4 +1,5 @@
-import { setToMyMoviesButtonEvent } from "./myMovies.js";
+import { setToMyMoviesButtonEvent, getUserMovies, saveMovieIDArray, saveButtonEvent } from "./myMovies.js";
+
 import "./firebase-init.js"; // Firebase 초기화
 import "./logoutstatus.js"; // 로그아웃 상태 관리를 위한 스크립트 추가
 
@@ -11,7 +12,7 @@ const options = {
   }
 };
 
-function getMovieData(searchText) {
+async function getMovieData(searchText) {
   console.log("sss", searchText);
   let url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
 
@@ -25,6 +26,8 @@ function getMovieData(searchText) {
   parentHtml.innerHTML = "";
 
   console.log("url부분", url);
+
+  await getUserMovies();
 
   // fetch를 통한 데이터 가져오기 + 카드 그려주는 로직
   fetch(url, options).then((response) => {
@@ -55,14 +58,14 @@ function getMovieData(searchText) {
         const tempButton = document.createElement("span");
         tempButton.className = "material-symbols-outlined saveButton";
 
-        // if (saveMovieIDArray.includes(String(movie.id))) {
-        //   tempButton.classList.add("saved");
-        // }
+        if (saveMovieIDArray.includes(String(id))) {
+          tempButton.classList.add("saved");
+        }
 
         tempButton.style.fontSize = "36px";
         tempButton.innerText = "favorite";
 
-        // tempButton.addEventListener("click", saveButtonEvent);
+        tempButton.addEventListener("click", saveButtonEvent);
 
         tempCard.appendChild(tempButton);
         document.getElementById("movie-container").appendChild(tempCard);

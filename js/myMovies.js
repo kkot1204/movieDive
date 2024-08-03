@@ -1,4 +1,4 @@
-import "./firebase-init.js";
+// import "./firebase-init.js";
 import "./logoutstatus.js";
 
 // TODO: index.html 에도 myMovies로 이동할 클릭 이벤트 추가
@@ -13,7 +13,8 @@ export const setToMyMoviesButtonEvent = () => {
 
 setToMyMoviesButtonEvent();
 
-const userID = "c4JZesd1IXO1W2wHJyLDy46CMg52"; // 테스트용 ID, TODO: 추후 firebase auth에 id 관련 메서드 등 찾아서 적용
+let userID = localStorage.getItem("userID");
+console.log("userID: ", userID);
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore, getDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
@@ -32,15 +33,16 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const docRef = doc(db, "user", `${userID}`);
 
-let saveMovieIDArray;
-let reviewMovieIDArray;
+export let saveMovieIDArray = [];
+let reviewMovieIDArray = [];
 
 let saveMovieInfoArray = [];
 let reviewMovieInfoArray = [];
 
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
-const getUserMovies = async () => {
+export const getUserMovies = async () => {
   try {
+    if (userID === "null") return;
     let userInfo = await getDoc(docRef);
     saveMovieIDArray = userInfo.data().saveMovies;
     reviewMovieIDArray = userInfo.data().reviewMovies;
@@ -94,14 +96,16 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  updateMyMovieSection(saveMovieInfoArray);
-  updateMyMovieSection(reviewMovieInfoArray);
+  if (window.location.href.includes("myMovies")) {
+    updateMyMovieSection(saveMovieInfoArray);
+    updateMyMovieSection(reviewMovieInfoArray);
+  }
 }
 
-if(window.location.href.includes('myMovies')) showUserMovies();
+showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
-const saveButtonEvent = async (event) => {
+export const saveButtonEvent = async (event) => {
   event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
   if (event.currentTarget.classList.contains("saved")) {
@@ -113,7 +117,7 @@ const saveButtonEvent = async (event) => {
   }
 
   await updateDoc(docRef, { saveMovies: saveMovieIDArray });
-  location.reload(true);
+  if (window.location.href.includes("myMovies")) location.reload(true);
 };
 
 /** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.

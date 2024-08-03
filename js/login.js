@@ -17,8 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
           // 로그인 정보를 가져오고 성공 시 index.html 로 이동
           //Firebase 인증 메서드가 성공적으로 완료됐을 때 반환되는 객체 userCredential
           const user = userCredential.user;
-          window.location.href = "/index.html";
+          localStorage.setItem("userID", user.uid);
         })
+        .then(() => (window.location.href = "/index.html"))
         .catch((error) => {
           alert("로그인 정보가 일치하지 않습니다.");
           const errorCode = error.code;
