@@ -4,9 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/comment.css" />
   </head>
+  <script type="module">
+    // Firebase SDK 라이브러리 가져오기
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
+    //사용자 아이디를 추가하기 위해 추가
+    import "package:cloud_firestore/cloud_firestore.dart";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
+      authDomain: "movieaccount-3d409.firebaseapp.com",
+      projectId: "movieaccount-3d409",
+      storageBucket: "movieaccount-3d409.appspot.com",
+      messagingSenderId: "942641611452",
+      appId: "1:942641611452:web:864f3cd1c0918cfe14c6b9",
+      measurementId: "G-E97WVRRBKZ"
+    };
+
+    // Firebase 인스턴스 초기화
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    //사용자 아이디 가져오기
+
+    $("#submit-comment").click(async function () {
+      event.preventDefault();
+      let content = $("#comment-input").val();
+      let userid = $("#").val();
+      let doc = { content: "bob", age: "30" };
+      await addDoc(collection(db, "review"), doc);
+    });
+  </script>
   <body>
     <header id="header">
       <nav>
@@ -14,13 +50,45 @@
       </nav>
     </header>
 
-    <section style="text-align: center">
+    <section class="demo1">
+      <div></div>
       <h2>상세페이지</h2>
     </section>
-    <script src="js/movie.js"></script>
-    <script type="module" src="js/login.js"></script>
-    <script type="module" src="js/signup.js"></script>
+
+    <div class="comment_container">
+      <div>
+        <form>
+          <fieldset>
+            <legend>댓글 쓰기</legend>
+          </fieldset>
+          <input type="text" id="comment-input" placeholder="댓글을 남겨주세요" />
+          <button id="submit-comment">등록</button>
+        </form>
+
+        <div class="comment_list_wrap">
+          <ul id="comments-list">
+            <li>
+              <div class="comment_info_wrap">
+                <img
+                  src="https://an2-img.amz.wtchn.net/image/v2/JluZ_Eo2guFDV1zqnmoCcw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1UQXdlREV3TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZOazVYTlZFd05ucEZSWFl4V1M5d2NtOW1hV3hsTHpJd01EazFOek0yTnpZeU1qSTBPVE1pZlEuM1NNdW52LV9QQm5YUWp5YnV1OW0weW1vYXhtM1R4c0lHellHYUE2QlZpUQ"
+                  alt=""
+                />
+                <div class="comment_info_nickname">
+                  <div id="commentId">닉네임</div>
+                  <div class="info_base">2024-07-05 15:45</div>
+                </div>
+              </div>
+              <div class="comment_text_wrap">
+                Lorem ipsum santium modi pariatur iure minima nesciunt dolorem saepe adipisci iste?
+              </div>
+              <div class="comment_button">
+                <span>수정</span>
+                <span>삭제</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
-
-test
