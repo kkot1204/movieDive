@@ -1,5 +1,6 @@
-// import "./firebase-init.js";
 import "./logoutstatus.js";
+import { firestoreDB } from "./firebase-init.js";
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // TODO: index.html 에도 myMovies로 이동할 클릭 이벤트 추가
 const moveToMyMoviesButton = document.querySelector("#moveToMyMoviesButton");
@@ -14,24 +15,7 @@ export const setToMyMoviesButtonEvent = () => {
 setToMyMoviesButtonEvent();
 
 let userID = localStorage.getItem("userID");
-console.log("userID: ", userID);
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getFirestore, getDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
-  authDomain: "movieaccount-3d409.firebaseapp.com",
-  projectId: "movieaccount-3d409",
-  storageBucket: "movieaccount-3d409.appspot.com",
-  messagingSenderId: "942641611452",
-  appId: "1:942641611452:web:864f3cd1c0918cfe14c6b9",
-  measurementId: "G-E97WVRRBKZ"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const docRef = doc(db, "user", `${userID}`);
+const docRef = doc(firestoreDB, "user", `${userID}`);
 
 export let saveMovieIDArray = [];
 let reviewMovieIDArray = [];
