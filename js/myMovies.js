@@ -108,6 +108,24 @@ export const saveButtonEvent = async (event) => {
   if (window.location.href.includes("myMovies")) location.reload(true);
 };
 
+/** 리뷰 등록, 삭제시 firestore 업데이트
+ * @param isAddReview - 리뷰 등록하는 경우 true, 삭제하는 경우 false
+ */
+export const updateReviewMovie = async (isAddReview) => {
+  if (userID === "null") return;
+
+  let reviewedMovieID; // TODO: 지영님 기능 보고 맞춰서 받아오기
+  if (isReview) {
+    // 리뷰 등록하는 경우
+    reviewMovieIDArray.push(reviewedMovieID);
+  } else {
+    // 리뷰 삭제하는 경우
+    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != reviewedMovieID);
+  }
+
+  await updateDoc(docRef, { reviewMovies: reviewMovieIDArray });
+};
+
 /** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.
  * @param movieInfoArray - saveMovieInfoArray 혹은 reviewMovieInfoArray
  */
