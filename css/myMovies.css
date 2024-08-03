@@ -1,12 +1,9 @@
-#logoutButton {
-  border: none;
-  background: transparent;
+/* #logoutButton {
   width: 120px;
   height: 48px;
   line-height: 48px;
-  color: white;
   font-size: 1.3rem;
-}
+} */
 
 #moveToMyMoviesButton {
   width: 56px;
@@ -40,8 +37,6 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 8rem;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 /* movie card */
@@ -50,13 +45,13 @@
   width: 300px;
   justify-self: center;
   cursor: pointer;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
 
   flex-grow: 0;
+
+  position: relative;
 }
 
 .movie-card img {
@@ -65,12 +60,38 @@
 .movie-card .text_area {
   padding: 24px;
   color: white;
+  width: 250px;
 }
 .movie-card .text_area h3 {
   font-size: 1.3rem;
 }
 .movie-card .text_area p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 1rem;
   padding-top: 10px;
+}
+
+.saveButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  user-select: none;
+
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+}
+
+.savedButton {
+  font-variation-settings:
+    "FILL" 100,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
