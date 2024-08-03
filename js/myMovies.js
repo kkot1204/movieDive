@@ -101,7 +101,7 @@ async function showUserMovies() {
 showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
-const saveButtonEvent = (event) => {
+const saveButtonEvent = async (event) => {
   event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
   if (event.currentTarget.classList.contains("saved")) {
@@ -112,10 +112,8 @@ const saveButtonEvent = (event) => {
     saveMovieIDArray = saveMovieIDArray.filter((id) => id != selectedMovieID);
   }
 
-  savedMoviesSection.style.minHeight = savedMoviesSection.offsetHeight; // 이거 확인 필요
-  savedMoviesSection.innerHTML = "";
-  updateMyMovieSection(saveMovieInfoArray);
-  updateDoc(docRef, { saveMovies: saveMovieIDArray });
+  await updateDoc(docRef, { saveMovies: saveMovieIDArray });
+  location.reload(true);
 };
 
 /** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.
