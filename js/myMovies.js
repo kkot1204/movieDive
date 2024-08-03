@@ -90,6 +90,10 @@ showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 export const saveButtonEvent = async (event) => {
+  if (userID === "null") {
+    alert("회원가입/로그인을 먼저 해주세요!");
+    return;
+  }
   event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
   if (event.currentTarget.classList.contains("saved")) {
