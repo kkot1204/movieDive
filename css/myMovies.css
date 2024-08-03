@@ -38,9 +38,7 @@
   width: 300px;
   justify-self: center;
   cursor: pointer;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
 
@@ -76,17 +74,21 @@
   right: 10px;
   user-select: none;
 
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .saved {
-  font-variation-settings:
-    "FILL" 100,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.hidden {
+  display: none;
+}
+
+.alertEmptyList {
+  text-align: center;
+  margin: auto;
+  height: 200px;
+  line-height: 200px;
+  font-size: 1.5rem;
 }

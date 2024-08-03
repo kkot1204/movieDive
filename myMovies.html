@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -25,9 +25,13 @@
 
     <section class="interestMovies">
       <h2>내가 찜한 영화</h2>
-      <div class="savedMovies"></div>
+      <div class="savedMovies">
+        <div class="alertEmptyList hidden">찜한 영화가 없습니다.</div>
+      </div>
       <h2>내가 리뷰한 영화</h2>
-      <div class="reviewedMovies"></div>
+      <div class="reviewedMovies">
+        <div class="alertEmptyList hidden">리뷰한 영화가 없습니다.</div>
+      </div>
     </section>
     <script type="module" src="js/myMovies.js"></script>
     <script type="module" src="js/logoutstatus.js"></script>

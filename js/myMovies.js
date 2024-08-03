@@ -80,6 +80,8 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
+  if (saveMovieIDArray.length === 0) savedMoviesSection.firstElementChild.classList.remove("hidden");
+  if (reviewMovieIDArray.length === 0) reviewedMoviesSection.firstElementChild.classList.remove("hidden");
   updateMyMovieSection(saveMovieInfoArray);
   updateMyMovieSection(reviewMovieInfoArray);
 }
