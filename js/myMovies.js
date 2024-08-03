@@ -94,52 +94,8 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  saveMovieInfoArray.forEach((movie) => {
-    const tempCard = document.createElement("div");
-    tempCard.className = "movie-card";
-    tempCard.id = movie.id;
-
-    tempCard.innerHTML = `
-    <img src=${movie.posterPath} alt="영화이미지" />
-    <div class="text_area">
-      <h3>${movie.title}</h3>
-      <p>${movie.overview}</p>
-    </div>`;
-
-    const tempButton = document.createElement("span");
-    tempButton.className = "material-symbols-outlined saveButton saved";
-    tempButton.style.fontSize = "36px";
-    tempButton.innerText = "favorite";
-
-    tempButton.addEventListener("click", saveButtonEvent);
-
-    tempCard.appendChild(tempButton);
-    savedMoviesSection.appendChild(tempCard);
-  });
-
-  reviewMovieInfoArray.forEach((movie) => {
-    const tempCard = document.createElement("div");
-    tempCard.className = "movie-card";
-    tempCard.id = movie.id;
-
-    tempCard.innerHTML = `
-    <img src=${movie.posterPath} alt="영화이미지" />
-    <div class="text_area">
-      <h3>${movie.title}</h3>
-      <p>${movie.overview}</p>
-    </div>
-    `;
-
-    const tempButton = document.createElement("span");
-    tempButton.className = "material-symbols-outlined saveButton";
-    tempButton.style.fontSize = "36px";
-    tempButton.innerText = "favorite";
-
-    tempButton.addEventListener("click", saveButtonEvent);
-
-    tempCard.appendChild(tempButton);
-    reviewedMoviesSection.appendChild(tempCard);
-  });
+  updateMyMovieSection(saveMovieInfoArray);
+  updateMyMovieSection(reviewMovieInfoArray);
 }
 
 showUserMovies();
@@ -156,5 +112,43 @@ const saveButtonEvent = (event) => {
     saveMovieIDArray = saveMovieIDArray.filter((id) => id != selectedMovieID);
   }
 
+  savedMoviesSection.style.minHeight = savedMoviesSection.offsetHeight; // 이거 확인 필요
+  savedMoviesSection.innerHTML = "";
+  updateMyMovieSection(saveMovieInfoArray);
   updateDoc(docRef, { saveMovies: saveMovieIDArray });
+};
+
+/** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.
+ * @param movieInfoArray - saveMovieInfoArray 혹은 reviewMovieInfoArray
+ */
+const updateMyMovieSection = (movieInfoArray) => {
+  movieInfoArray.forEach((movie) => {
+    const tempCard = document.createElement("div");
+    tempCard.className = "movie-card";
+    tempCard.id = movie.id;
+
+    tempCard.innerHTML = `
+    <img src=${movie.posterPath} alt="영화이미지" />
+    <div class="text_area">
+      <h3>${movie.title}</h3>
+      <p>${movie.overview}</p>
+    </div>`;
+
+    const tempButton = document.createElement("span");
+    tempButton.className = "material-symbols-outlined saveButton";
+
+    if (saveMovieIDArray.includes(String(movie.id))) {
+      tempButton.classList.add("saved");
+    }
+
+    tempButton.style.fontSize = "36px";
+    tempButton.innerText = "favorite";
+
+    tempButton.addEventListener("click", saveButtonEvent);
+
+    tempCard.appendChild(tempButton);
+
+    const movieSection = movieInfoArray === saveMovieInfoArray ? savedMoviesSection : reviewedMoviesSection;
+    movieSection.appendChild(tempCard);
+  });
 };
