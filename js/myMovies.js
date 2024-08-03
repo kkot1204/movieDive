@@ -80,13 +80,11 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  if (window.location.href.includes("myMovies")) {
-    updateMyMovieSection(saveMovieInfoArray);
-    updateMyMovieSection(reviewMovieInfoArray);
-  }
+  updateMyMovieSection(saveMovieInfoArray);
+  updateMyMovieSection(reviewMovieInfoArray);
 }
 
-showUserMovies();
+if (window.location.href.includes("myMovies")) showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 export const saveButtonEvent = async (event) => {
