@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
   </head>
 
   <body>
     <nav id="header">
       <h2><a href="index.html">Top Movie</a></h2>
+      <div class="navButtons">
+        <button class="moveToLoginPageButton" type="button">로그인</button>
+        <button class="moveToSignUpPageButton" type="button">회원가입</button>
+
+        <button id="logoutButton" style="display: none">로그아웃</button>
+        <button id="moveToMyMoviesButton" onClick="window.location.href=`./myMovies.html`"></button>
+      </div>
     </nav>
     <div class="main_container">
       <h1>Top Rank Movie</h1>
@@ -35,7 +46,10 @@
       </div>
     </section>
 
-    <script src="js/movie.js"></script>
+    <script type="module" src="js/movie.js"></script>
     <script type="module" src="js/login.js"></script>
+    <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>
