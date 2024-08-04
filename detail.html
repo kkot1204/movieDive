@@ -9,16 +9,13 @@
     <link rel="stylesheet" href="css/comment.css" />
   </head>
   <script type="module">
-    // Firebase SDK 라이브러리 가져오기
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
     import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-    //사용자 아이디를 추가하기 위해 추가
-    import "package:cloud_firestore/cloud_firestore.dart";
+    //사용자 아이디를 위해 추가
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
       apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
       authDomain: "movieaccount-3d409.firebaseapp.com",
@@ -29,18 +26,76 @@
       measurementId: "G-E97WVRRBKZ"
     };
 
-    // Firebase 인스턴스 초기화
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    //사용자 아이디 가져오기
+    // 사용자 아이디 불러오기
+    const auth = getAuth();
+    let userId = null;
 
-    $("#submit-comment").click(async function () {
-      event.preventDefault();
-      let content = $("#comment-input").val();
-      let userid = $("#").val();
-      let doc = { content: "bob", age: "30" };
-      await addDoc(collection(db, "review"), doc);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userId = user.uid; // 로그인한 사용자의 UID
+        console.log("사용자 ID: ", userId);
+      } else {
+        console.log("사용자가 로그인하지 않았습니다.");
+      }
+    });
+
+    // 댓글을 로드하는 함수
+    async function loadComments() {
+      const querySnapshot = await getDocs(collection(db, "review"));
+      const commentList = $(".comment_list_wrap ul");
+      commentList.empty(); // 이전 댓글을 비움
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const commentItem = `
+          <li data-id="${doc.id}">
+            <div class="comment_info_wrap">
+              <img src="https://example.com/path/to/profile.jpg" alt="Profile Image" />
+              <div class="comment_info_nickname">
+                <div>${data.nickname}</div>
+                <div class="info_base">${data.timestamp}</div>
+              </div>
+            </div>
+            <div class="comment_text_wrap">${data.content}</div>
+            <div class="comment_button">
+              <span>수정</span>
+              <span>삭제</span>
+            </div>
+          </li>`;
+        commentList.append(commentItem); // 댓글 추가
+      });
+    }
+
+    $(document).ready(function () {
+      loadComments(); // 페이지 로드 시 댓글 불러오기
+
+      $("#commentSubmit").click(async function (event) {
+        event.preventDefault();
+        let content = $("#commentInput").val();
+        let timestamp = new Date().toISOString();
+        let nickname = $("#nicknameInput").val();
+        let doc = { content: content, timestamp: timestamp };
+
+        if (!nickname) {
+          alert("닉네임을 입력해주세요."); //닉네임 작성하지 않으면 알럿창 띄우기
+          return;
+        }
+
+        if (userId) {
+          await addDoc(collection(db, "review"), {
+            content: content,
+            nickname: nickname, //닉네임저장
+            userId: userId, //사용자 아이디도 저장
+            timestamp: timestamp
+          });
+          loadComments(); //댓글 새로고침
+        } else {
+          alert("로그인 후 이용해주세요");
+        }
+      });
     });
   </script>
   <body>
@@ -51,8 +106,7 @@
     </header>
 
     <section class="demo1">
-      <div></div>
-      <h2>상세페이지</h2>
+      <h2 style="font-size: 50px; text-align: left">상세페이지 영역</h2>
     </section>
 
     <div class="comment_container">
@@ -61,31 +115,15 @@
           <fieldset>
             <legend>댓글 쓰기</legend>
           </fieldset>
-          <input type="text" id="comment-input" placeholder="댓글을 남겨주세요" />
-          <button id="submit-comment">등록</button>
+          <input type="text" id="nicknameInput" placeholder="닉네임 입력" />
+          <input type="text" id="commentInput" placeholder="리뷰를 작성해주세요" />
+
+          <button id="commentSubmit">등록</button>
         </form>
 
         <div class="comment_list_wrap">
-          <ul id="comments-list">
-            <li>
-              <div class="comment_info_wrap">
-                <img
-                  src="https://an2-img.amz.wtchn.net/image/v2/JluZ_Eo2guFDV1zqnmoCcw.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1UQXdlREV3TUNKZExDSndJam9pTDNZeUwzTjBiM0psTDNWelpYSXZOazVYTlZFd05ucEZSWFl4V1M5d2NtOW1hV3hsTHpJd01EazFOek0yTnpZeU1qSTBPVE1pZlEuM1NNdW52LV9QQm5YUWp5YnV1OW0weW1vYXhtM1R4c0lHellHYUE2QlZpUQ"
-                  alt=""
-                />
-                <div class="comment_info_nickname">
-                  <div id="commentId">닉네임</div>
-                  <div class="info_base">2024-07-05 15:45</div>
-                </div>
-              </div>
-              <div class="comment_text_wrap">
-                Lorem ipsum santium modi pariatur iure minima nesciunt dolorem saepe adipisci iste?
-              </div>
-              <div class="comment_button">
-                <span>수정</span>
-                <span>삭제</span>
-              </div>
-            </li>
+          <ul>
+            <!-- 댓글 리스트가 여기 추가됩니다 -->
           </ul>
         </div>
       </div>
