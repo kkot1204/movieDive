@@ -1,4 +1,5 @@
-import { setToMyMoviesButtonEvent } from "./myMovies.js";
+import { setToMyMoviesButtonEvent, getUserMovies, saveMovieIDArray, saveButtonEvent } from "./myMovies.js";
+
 import "./firebase-init.js"; // Firebase 초기화
 import "./logoutstatus.js"; // 로그아웃 상태 관리를 위한 스크립트 추가
 
@@ -11,7 +12,7 @@ const options = {
   }
 };
 
-function getMovieData(searchText) {
+async function getMovieData(searchText) {
   console.log("sss", searchText);
   let url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
 
@@ -26,6 +27,8 @@ function getMovieData(searchText) {
 
   console.log("url부분", url);
 
+  await getUserMovies();
+
   // fetch를 통한 데이터 가져오기 + 카드 그려주는 로직
   fetch(url, options).then((response) => {
     response.json().then((response) => {
@@ -39,18 +42,33 @@ function getMovieData(searchText) {
         let vote = i["vote_average"];
         let id = i["id"];
 
-        temp_html += `
-            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
-                <img src="${img_url}" alt="영화이미지">
-                <div class="text_area">
-                  <h3>${movie_title}</h3>
-                  <p>${overview}</p>
-                  <span>평점 : ${vote}</span>
-                </div>
-                
+        const tempCard = document.createElement("div");
+        tempCard.className = "movie-card";
+        tempCard.id = id;
+
+        tempCard.innerHTML = `
+            <img src="${img_url}" alt="영화이미지">
+            <div class="text_area">
+                <h3>${movie_title}</h3>
+                <p>${overview}</p>
+                <span>평점 : ${vote}</span>
             </div>
           `;
-        document.getElementById("movie-container").innerHTML = temp_html;
+
+        const tempButton = document.createElement("span");
+        tempButton.className = "material-symbols-outlined saveButton";
+
+        if (saveMovieIDArray.includes(String(id))) {
+          tempButton.classList.add("saved");
+        }
+
+        tempButton.style.fontSize = "36px";
+        tempButton.innerText = "favorite";
+
+        tempButton.addEventListener("click", saveButtonEvent);
+
+        tempCard.appendChild(tempButton);
+        document.getElementById("movie-container").appendChild(tempCard);
       });
     });
   });

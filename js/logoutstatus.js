@@ -31,8 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
       signOut(auth)
         .then(() => {
           console.log("User logged out");
-          window.location.href = "index.html";
+          localStorage.setItem("userID", null);
         })
+        .then(() => (window.location.href = "index.html"))
         .catch((error) => {
           console.error("Logout failed:", error);
         });
