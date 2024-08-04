@@ -4,9 +4,100 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/comment.css" />
   </head>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
+    //사용자 아이디를 위해 추가
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
+      authDomain: "movieaccount-3d409.firebaseapp.com",
+      projectId: "movieaccount-3d409",
+      storageBucket: "movieaccount-3d409.appspot.com",
+      messagingSenderId: "942641611452",
+      appId: "1:942641611452:web:864f3cd1c0918cfe14c6b9",
+      measurementId: "G-E97WVRRBKZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 사용자 아이디 불러오기
+    const auth = getAuth();
+    let userId = null;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        userId = user.uid; // 로그인한 사용자의 UID
+        console.log("사용자 ID: ", userId);
+      } else {
+        console.log("사용자가 로그인하지 않았습니다.");
+      }
+    });
+
+    // 댓글을 로드하는 함수
+    async function loadComments() {
+      const querySnapshot = await getDocs(collection(db, "review"));
+      const commentList = $(".comment_list_wrap ul");
+      commentList.empty(); // 이전 댓글을 비움
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const commentItem = `
+          <li data-id="${doc.id}">
+            <div class="comment_info_wrap">
+              <img src="https://example.com/path/to/profile.jpg" alt="Profile Image" />
+              <div class="comment_info_nickname">
+                <div>${data.nickname}</div>
+                <div class="info_base">${data.timestamp}</div>
+              </div>
+            </div>
+            <div class="comment_text_wrap">${data.content}</div>
+            <div class="comment_button">
+              <span>수정</span>
+              <span>삭제</span>
+            </div>
+          </li>`;
+        commentList.append(commentItem); // 댓글 추가
+      });
+    }
+
+    $(document).ready(function () {
+      loadComments(); // 페이지 로드 시 댓글 불러오기
+
+      $("#commentSubmit").click(async function (event) {
+        event.preventDefault();
+        let content = $("#commentInput").val();
+        let timestamp = new Date().toISOString();
+        let nickname = $("#nicknameInput").val();
+        let doc = { content: content, timestamp: timestamp };
+
+        if (!nickname) {
+          alert("닉네임을 입력해주세요."); //닉네임 작성하지 않으면 알럿창 띄우기
+          return;
+        }
+
+        if (userId) {
+          await addDoc(collection(db, "review"), {
+            content: content,
+            nickname: nickname, //닉네임저장
+            userId: userId, //사용자 아이디도 저장
+            timestamp: timestamp
+          });
+          loadComments(); //댓글 새로고침
+        } else {
+          alert("로그인 후 이용해주세요");
+        }
+      });
+    });
+  </script>
   <body>
     <header id="header">
       <nav>
@@ -14,11 +105,28 @@
       </nav>
     </header>
 
-    <section style="text-align: center">
-      <h2>상세페이지</h2>
+    <section class="demo1">
+      <h2 style="font-size: 50px; text-align: left">상세페이지 영역</h2>
     </section>
-    <script src="js/movie.js"></script>
-    <script type="module" src="js/login.js"></script>
-    <script type="module" src="js/signup.js"></script>
+
+    <div class="comment_container">
+      <div>
+        <form>
+          <fieldset>
+            <legend>댓글 쓰기</legend>
+          </fieldset>
+          <input type="text" id="nicknameInput" placeholder="닉네임 입력" />
+          <input type="text" id="commentInput" placeholder="리뷰를 작성해주세요" />
+
+          <button id="commentSubmit">등록</button>
+        </form>
+
+        <div class="comment_list_wrap">
+          <ul>
+            <!-- 댓글 리스트가 여기 추가됩니다 -->
+          </ul>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
