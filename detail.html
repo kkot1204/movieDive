@@ -4,21 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/comment.css" />
   </head>
-
   <body>
     <header id="header">
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
+        <div class="navButtons">
+          <button id="logoutButton">로그아웃</button>
+          <button id="moveToMyMoviesButton" onClick="window.location.href='./myMovies.html'"></button>
+        </div>
       </nav>
     </header>
 
-    <section style="text-align: center">
-      <h2>상세페이지</h2>
-    </section>
-    <script src="js/movie.js"></script>
-    <script type="module" src="js/login.js"></script>
-    <script type="module" src="js/signup.js"></script>
+    <div class="comment_container">
+      <div>
+        <form>
+          <fieldset>
+            <legend>댓글 쓰기</legend>
+          </fieldset>
+          <!-- <input type="text" id="nicknameInput" placeholder="닉네임 입력" /> -->
+
+          <input type="text" id="commentInput" placeholder="리뷰를 작성해주세요" />
+
+          <button id="commentSubmit">등록</button>
+        </form>
+
+        <div class="comment_list_wrap">
+          <ul>
+            <!-- 댓글 리스트가 여기 추가됩니다 -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/comment.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
   </body>
 </html>
