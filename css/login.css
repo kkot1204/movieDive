@@ -134,3 +134,12 @@ section {
   opacity: 1;
   visibility: visible; /*hover시 발생하는 이벤트*/
 }
+
+.moveToSignUpPageButton {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
