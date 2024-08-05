@@ -44,11 +44,21 @@
 
     <section class="main-movie-box" id="movie_section">
       <h2>Top Rank Movie</h2>
+      <!-- 최신순, 오래된 순, 별점 높은 순, 별점 낮은 순 -->
+      <div class="selectbox">
+        <button class="selectbutton">Now Playing</button>
+        <ul class="optionlist">
+          <li id="now_playing" class="optionitem">Now Playing</li>
+          <li id="top_rated" class="optionitem">Top Rated</li>
+          <li id="low_rated" class="optionitem">Lowest Rated</li>
+        </ul>
+      </div>
       <div id="movie-container">
         <div id="movie-card" class="movie-card"></div>
       </div>
     </section>
 
+    <script type="module" src="js/select.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/login.js"></script>
     <script type="module" src="js/signup.js"></script>
