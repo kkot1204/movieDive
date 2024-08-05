@@ -196,6 +196,33 @@ function picture() {
 
 document.addEventListener("DOMContentLoaded", (event) => {
   picture();
-  // Optionally, you can set the color change to happen periodically
-  setInterval(picture, 1000); // change color every 3 seconds
+  setInterval(picture, 1000);
+});
+
+// 이미지 파일 경로 배열
+const imageCount = 5; // 이미지 파일 수
+const imagePaths = [];
+
+for (let i = 1; i <= imageCount; i++) {
+  imagePaths.push(`image/${i}.png`);
+}
+
+// 랜덤 이미지 불러오기 함수
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * imagePaths.length);
+  return imagePaths[randomIndex];
+}
+
+// DOMContentLoaded 이벤트 리스너
+document.addEventListener("DOMContentLoaded", () => {
+  const randomImageElement = document.getElementById("moveToMyMoviesButton");
+  const randomImagePath = getRandomImage();
+
+  const imgElement = document.createElement("img");
+  imgElement.src = randomImagePath;
+  imgElement.alt = "Random Image";
+  imgElement.width = 42; // 너비 설정
+  imgElement.height = 42; // 높이 설정
+
+  randomImageElement.appendChild(imgElement);
 });
