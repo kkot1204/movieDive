@@ -26,7 +26,7 @@ let reviewMovieInfoArray = [];
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
 export const getUserMovies = async () => {
   try {
-    if (userID === "null" || !userID) return;
+    if (!userID || userID === "null") return;
     let userInfo = await getDoc(docRef);
     saveMovieIDArray = userInfo.data().saveMovies;
     reviewMovieIDArray = userInfo.data().reviewMovies;
@@ -90,7 +90,7 @@ if (window.location.href.includes("myMovies")) showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 export const saveButtonEvent = async (event) => {
-  if (userID === "null") {
+  if (!userID || userID === "null") {
     alert("회원가입/로그인을 먼저 해주세요!");
     return;
   }
@@ -111,16 +111,14 @@ export const saveButtonEvent = async (event) => {
 /** 리뷰 등록, 삭제시 firestore 업데이트
  * @param isAddReview - 리뷰 등록하는 경우 true, 삭제하는 경우 false
  */
-export const updateReviewMovie = async (isAddReview) => {
-  if (userID === "null") return;
-
-  let reviewedMovieID; // TODO: 지영님 기능 보고 맞춰서 받아오기
-  if (isReview) {
+export const updateReviewMovie = async (movieID, isAddReview) => {
+  if (!userID || userID === "null") return;
+  if (isAddReview) {
     // 리뷰 등록하는 경우
-    reviewMovieIDArray.push(reviewedMovieID);
+    reviewMovieIDArray.push(movieID);
   } else {
     // 리뷰 삭제하는 경우
-    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != reviewedMovieID);
+    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != movieID);
   }
 
   await updateDoc(docRef, { reviewMovies: reviewMovieIDArray });
