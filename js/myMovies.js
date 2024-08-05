@@ -176,3 +176,19 @@ const moveToDetail = (event) => {
   if (event.target.classList.contains("saveButton")) return;
   window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
 };
+
+function picture() {
+  let userPicture = document.getElementById("moveToMyMoviesButton");
+  let randomColor =
+    "#" +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0");
+  userPicture.style.backgroundColor = randomColor;
+}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  picture();
+  // Optionally, you can set the color change to happen periodically
+  setInterval(picture, 1000); // change color every 3 seconds
+});
