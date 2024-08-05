@@ -52,9 +52,7 @@
   width: 290px;
   position: absolute;
   border-radius: 20px;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
 }
 .main_container img:nth-of-type(1) {
   width: 260px;
@@ -123,9 +121,7 @@ section h2 {
   margin: 30px;
   width: 400px;
   cursor: pointer;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
   transition: 1s;
@@ -158,6 +154,7 @@ section h2 {
 #moveToMyMoviesButton {
   width: 56px;
   height: 56px;
+  background-image: url(../image/1.png);
   transition: background-color 1s ease;
   background-size: cover;
   background-position: center;
@@ -176,21 +173,13 @@ section h2 {
   user-select: none;
   text-shadow: 0px 0px 3px black !important;
 
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .saved {
   color: #ca0000 !important;
   text-shadow: none !important;
-  font-variation-settings:
-    "FILL" 100,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .moveToSignUpPageButton,
