@@ -116,7 +116,7 @@ section h2 {
   height: 35px;
   border-radius: 4px;
   border: 1px solid #fff;
-  background: url(../img/Vector.png) calc(100% - 10px) center no-repeat;
+  background: url(../image/Vector.png) calc(100% - 10px) center no-repeat;
   /* background-size: 20px; */
   cursor: pointer;
 }
