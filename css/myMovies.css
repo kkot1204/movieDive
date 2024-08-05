@@ -21,8 +21,11 @@
   justify-content: start;
 
   width: 90%;
-  font-family: "S-CoreDream-3Light";
   font-weight: 400;
+}
+
+.interestMovies > h2 {
+  font-family: "S-CoreDream-3Light";
 }
 
 .interestMovies > div {
@@ -40,7 +43,9 @@
   width: 300px;
   justify-self: center;
   cursor: pointer;
-  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow:
+    0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
 
@@ -52,14 +57,17 @@
 .movie-card img {
   width: 100%;
 }
+
 .movie-card .text_area {
   padding: 24px;
   color: white;
   width: 250px;
 }
+
 .movie-card .text_area h3 {
   font-size: 1.3rem;
 }
+
 .movie-card .text_area p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -77,13 +85,21 @@
   user-select: none;
   text-shadow: 0px 0px 3px black !important;
 
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 .saved {
   color: #ca0000 !important;
   text-shadow: none !important;
-  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings:
+    "FILL" 100,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 .logoutButton {
