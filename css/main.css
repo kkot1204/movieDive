@@ -73,7 +73,7 @@
 /* search_box css start */
 form.search_box {
   height: 50px;
-  display: inline-block;
+  display: flex;
   position: absolute;
   top: 60%;
   left: 10%;
@@ -97,6 +97,7 @@ form.search_box {
 .search_box button {
   width: 70px;
   cursor: pointer;
+  margin-left: 5px;
 }
 
 /* section movie-card css start */
