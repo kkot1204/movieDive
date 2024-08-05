@@ -52,9 +52,7 @@
   width: 290px;
   position: absolute;
   border-radius: 20px;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
 }
 .main_container img:nth-of-type(1) {
   width: 260px;
@@ -111,11 +109,10 @@ section h2 {
 }
 
 .selectbox {
-  float: right;
-  margin-right: 10px;
+  margin: 0 27px 0 auto;
   position: relative;
   width: 150px;
-  height: 35px;
+  height: 45px;
   border-radius: 4px;
   border: 1px solid #fff;
   background: url(../img/Vector.png) calc(100% - 10px) center no-repeat;
@@ -134,11 +131,12 @@ section h2 {
   background: transparent;
   color: #fff;
   cursor: pointer;
+  font-size: medium;
 }
 
 .selectbox .optionlist {
   position: absolute;
-  top: 2.5rem;
+  top: 3.5rem;
   left: 0;
   width: 100%;
   background: transparent;
@@ -149,15 +147,17 @@ section h2 {
   overflow: hidden;
   max-height: 0;
   transition: 0.3s ease-in;
+  z-index: 10;
 }
 
 .selectbox.active .optionlist {
   max-height: 500px;
   border: 1px solid #fff;
+  font-size: medium;
 }
 
 .selectbox .optionitem {
-  padding: 5px 15px 5px;
+  padding: 15px;
   transition: 0.1s;
 }
 
@@ -185,9 +185,7 @@ section h2 {
   margin: 30px;
   width: 400px;
   cursor: pointer;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
   transition: 1s;
@@ -238,21 +236,13 @@ section h2 {
   user-select: none;
   text-shadow: 0px 0px 3px black !important;
 
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .saved {
   color: #ca0000 !important;
   text-shadow: none !important;
-  font-variation-settings:
-    "FILL" 100,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .moveToSignUpPageButton,
