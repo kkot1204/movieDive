@@ -52,9 +52,7 @@
   width: 290px;
   position: absolute;
   border-radius: 20px;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
 }
 .main_container img:nth-of-type(1) {
   width: 260px;
@@ -121,17 +119,15 @@ section h2 {
 
 .movie-card {
   margin: 30px;
-  width: 400px;
+  width: 300px;
+  height: 600px;
   cursor: pointer;
-  box-shadow:
-    0px 7px 36px -11px white,
-    0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
   transition: 1s;
   margin-bottom: 100px;
-  flex-basis: 250px;
-  flex-grow: 1;
+  flex-basis: 300px;
   position: relative;
 }
 
@@ -175,20 +171,12 @@ section h2 {
   right: 10px;
   user-select: none;
 
-  font-variation-settings:
-    "FILL" 0,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .saved {
   color: #ca0000 !important;
-  font-variation-settings:
-    "FILL" 100,
-    "wght" 400,
-    "GRAD" 0,
-    "opsz" 24;
+  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .moveToSignUpPageButton,
