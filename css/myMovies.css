@@ -84,6 +84,7 @@
 }
 
 .saved {
+  color: #ca0000 !important;
   font-variation-settings:
     "FILL" 100,
     "wght" 400,
