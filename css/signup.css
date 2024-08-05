@@ -56,3 +56,12 @@ section {
   padding-left: 10px;
   background-color: #ca000096;
 }
+
+.moveToLoginPageButton {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}

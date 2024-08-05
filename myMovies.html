@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -17,17 +17,21 @@
       <nav>
         <h2><a href="index.html">Top Movie</a></h2>
         <div class="navButtons">
-          <button id="logoutButton">로그아웃</button>
+          <button id="logoutButton" class="logoutButton">로그아웃</button>
           <button id="moveToMyMoviesButton" onClick="window.location.href='./myMovies.html'"></button>
         </div>
       </nav>
     </header>
 
     <section class="interestMovies">
-      <h2>내가 찜한 영화</h2>
-      <div class="savedMovies"></div>
-      <h2>내가 리뷰한 영화</h2>
-      <div class="reviewedMovies"></div>
+      <h2>내가 찜한 영화 <span id="numberOfSaveMovies"></span></h2>
+      <div class="savedMovies">
+        <div class="alertEmptyList hidden">찜한 영화가 없습니다.</div>
+      </div>
+      <h2>내가 리뷰한 영화 <span id="numberOfReviewMovies"></span></h2>
+      <div class="reviewedMovies">
+        <div class="alertEmptyList hidden">리뷰한 영화가 없습니다.</div>
+      </div>
     </section>
     <script type="module" src="js/myMovies.js"></script>
     <script type="module" src="js/logoutstatus.js"></script>

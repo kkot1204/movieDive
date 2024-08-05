@@ -1,6 +1,6 @@
 import "./logoutstatus.js";
 import { firestoreDB } from "./firebase-init.js";
-import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // TODO: index.html 에도 myMovies로 이동할 클릭 이벤트 추가
 const moveToMyMoviesButton = document.querySelector("#moveToMyMoviesButton");
@@ -26,8 +26,15 @@ let reviewMovieInfoArray = [];
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
 export const getUserMovies = async () => {
   try {
-    if (userID === "null") return;
+    if (!userID || userID === "null") return; // 로그아웃한 경우, 로그인하지 않은 경우
     let userInfo = await getDoc(docRef);
+
+    // firestore에 존재하지 않는 경우 (ex. 이전에 만들어둔 게정)
+    if (!userInfo.exists()) {
+      await setDoc(doc(firestoreDB, "user", `${userID}`), { saveMovies: [], reviewMovies: [] });
+      userInfo = await getDoc(docRef);
+    }
+
     saveMovieIDArray = userInfo.data().saveMovies;
     reviewMovieIDArray = userInfo.data().reviewMovies;
 
@@ -77,19 +84,35 @@ const options = {
 
 const savedMoviesSection = document.querySelector(".savedMovies");
 const reviewedMoviesSection = document.querySelector(".reviewedMovies");
+const numberOfSaveMovies = document.querySelector("#numberOfSaveMovies");
+const numberOfReviewMovies = document.querySelector("#numberOfReviewMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  if (window.location.href.includes("myMovies")) {
-    updateMyMovieSection(saveMovieInfoArray);
-    updateMyMovieSection(reviewMovieInfoArray);
+  if (saveMovieIDArray.length === 0) {
+    savedMoviesSection.firstElementChild.classList.remove("hidden");
+  } else {
+    numberOfSaveMovies.innerText = `(${String(saveMovieIDArray.length)})`;
   }
+
+  if (reviewMovieIDArray.length === 0) {
+    reviewedMoviesSection.firstElementChild.classList.remove("hidden");
+  } else {
+    numberOfReviewMovies.innerText = `(${String(reviewMovieIDArray.length)})`;
+  }
+
+  updateMyMovieSection(saveMovieInfoArray);
+  updateMyMovieSection(reviewMovieInfoArray);
 }
 
-showUserMovies();
+if (window.location.href.includes("myMovies")) showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 export const saveButtonEvent = async (event) => {
+  if (!userID || userID === "null") {
+    alert("회원가입/로그인을 먼저 해주세요!");
+    return;
+  }
   event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
   if (event.currentTarget.classList.contains("saved")) {
@@ -102,6 +125,22 @@ export const saveButtonEvent = async (event) => {
 
   await updateDoc(docRef, { saveMovies: saveMovieIDArray });
   if (window.location.href.includes("myMovies")) location.reload(true);
+};
+
+/** 리뷰 등록, 삭제시 firestore 업데이트
+ * @param isAddReview - 리뷰 등록하는 경우 true, 삭제하는 경우 false
+ */
+export const updateReviewMovie = async (movieID, isAddReview) => {
+  if (!userID || userID === "null") return;
+  if (isAddReview) {
+    // 리뷰 등록하는 경우
+    reviewMovieIDArray.push(movieID);
+  } else {
+    // 리뷰 삭제하는 경우
+    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != movieID);
+  }
+
+  await updateDoc(docRef, { reviewMovies: reviewMovieIDArray });
 };
 
 /** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.
@@ -133,8 +172,30 @@ const updateMyMovieSection = (movieInfoArray) => {
     tempButton.addEventListener("click", saveButtonEvent);
 
     tempCard.appendChild(tempButton);
+    tempCard.addEventListener("click", moveToDetail);
 
     const movieSection = movieInfoArray === saveMovieInfoArray ? savedMoviesSection : reviewedMoviesSection;
     movieSection.appendChild(tempCard);
   });
 };
+
+const moveToDetail = (event) => {
+  if (event.target.classList.contains("saveButton")) return;
+  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
+};
+
+function picture() {
+  let userPicture = document.getElementById("moveToMyMoviesButton");
+  let randomColor =
+    "#" +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0");
+  userPicture.style.backgroundColor = randomColor;
+}
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  picture();
+  // Optionally, you can set the color change to happen periodically
+  setInterval(picture, 1000); // change color every 3 seconds
+});
