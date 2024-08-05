@@ -77,11 +77,23 @@ const options = {
 
 const savedMoviesSection = document.querySelector(".savedMovies");
 const reviewedMoviesSection = document.querySelector(".reviewedMovies");
+const numberOfSaveMovies = document.querySelector("#numberOfSaveMovies");
+const numberOfReviewMovies = document.querySelector("#numberOfReviewMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  if (saveMovieIDArray.length === 0) savedMoviesSection.firstElementChild.classList.remove("hidden");
-  if (reviewMovieIDArray.length === 0) reviewedMoviesSection.firstElementChild.classList.remove("hidden");
+  if (saveMovieIDArray.length === 0) {
+    savedMoviesSection.firstElementChild.classList.remove("hidden");
+  } else {
+    numberOfSaveMovies.innerText = `(${String(saveMovieIDArray.length)})`;
+  }
+
+  if (reviewMovieIDArray.length === 0) {
+    reviewedMoviesSection.firstElementChild.classList.remove("hidden");
+  } else {
+    numberOfReviewMovies.innerText = `(${String(reviewMovieIDArray.length)})`;
+  }
+
   updateMyMovieSection(saveMovieInfoArray);
   updateMyMovieSection(reviewMovieInfoArray);
 }
