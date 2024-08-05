@@ -26,7 +26,7 @@ let reviewMovieInfoArray = [];
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
 export const getUserMovies = async () => {
   try {
-    if (userID === "null") return;
+    if (userID === "null" || !userID) return;
     let userInfo = await getDoc(docRef);
     saveMovieIDArray = userInfo.data().saveMovies;
     reviewMovieIDArray = userInfo.data().reviewMovies;
