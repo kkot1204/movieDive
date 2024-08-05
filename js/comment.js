@@ -116,16 +116,19 @@ $(document).ready(function () {
 
     if (userEmail) {
       // 사용자가 로그인한 경우
-      await addDoc(collection(firestoreDB, "review"), {
-        content: content,
-        userEmail: userEmail, // 로그인한 사용자 이메일
-        timestamp: timestamp, // 댓글 작성 시간
-        movieID: movieID // movieID 추가
-      });
+      const confirmSubmit = confirm("등록하겠습니까?");
+      if (confirmSubmit) {
+        await addDoc(collection(firestoreDB, "review"), {
+          content: content,
+          userEmail: userEmail, // 로그인한 사용자 이메일
+          timestamp: timestamp, // 댓글 작성 시간
+          movieID: movieID // movieID 추가
+        });
 
-      await updateReviewMovie(movieID, true);
+        await updateReviewMovie(movieID, true);
 
-      loadComments(); // 댓글 새로고침
+        loadComments(); // 댓글 새로고침
+      }
     } else {
       alert("로그인 후 이용해주세요");
     }

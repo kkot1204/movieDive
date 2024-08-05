@@ -219,7 +219,6 @@ section h2 {
 #moveToMyMoviesButton {
   width: 56px;
   height: 56px;
-  background-image: url(../image/1.png);
   transition: background-color 1s ease;
   background-size: cover;
   background-position: center;
