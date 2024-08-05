@@ -11,7 +11,9 @@ import {
   getDocs,
   doc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  query,
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 // 사용자 인증 관련 함수 가져오기
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
@@ -46,7 +48,14 @@ onAuthStateChanged(auth, (user) => {
 
 // 댓글을 로드하는 함수
 async function loadComments() {
-  const querySnapshot = await getDocs(collection(firestoreDB, "review")); //review컬렉션에서 모든 댓글 로드
+  // movieID에 해당하는 댓글만 쿼리
+  const commentsQuery = query(
+    collection(firestoreDB, "review"),
+    where("movieID", "==", movieID) // movieID 필터링
+  );
+
+  const querySnapshot = await getDocs(commentsQuery); // 필터링된 댓글 로드
+
   const commentList = $(".comment_list_wrap ul"); //댓글 목록을 담을 요소 선택
   commentList.empty(); // 이전 댓글을 비움
 
@@ -78,6 +87,7 @@ async function loadComments() {
   // 이벤트 리스너 등록
   attachCommentButtonListeners();
 }
+
 // 댓글 버튼에 대한 이벤트 리스너 등록 함수
 function attachCommentButtonListeners() {
   $(".edit-button")
@@ -109,7 +119,8 @@ $(document).ready(function () {
       await addDoc(collection(firestoreDB, "review"), {
         content: content,
         userEmail: userEmail, // 로그인한 사용자 이메일
-        timestamp: timestamp // 댓글 작성 시간
+        timestamp: timestamp, // 댓글 작성 시간
+        movieID: movieID // movieID 추가
       });
 
       await updateReviewMovie(movieID, true);
