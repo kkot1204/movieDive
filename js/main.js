@@ -16,7 +16,7 @@ let movie_list;
 
 async function getMovieData(searchText) {
   console.log("sss", searchText);
-  let url = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+  let url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
   // 검색어가 있을 경우에는 검색 관련 url을 붙여준다.
   if (searchText) {
@@ -34,7 +34,7 @@ async function getMovieData(searchText) {
   // fetch를 통한 데이터 가져오기 + 카드 그려주는 로직
   fetch(url, options).then((response) => {
     response.json().then((response) => {
-      let movie_list = response["results"];
+      movie_list = response["results"];
       console.log(response);
       let temp_html = ``;
       movie_list.forEach((i) => {
@@ -44,42 +44,47 @@ async function getMovieData(searchText) {
         let vote = i["vote_average"];
         let id = i["id"];
 
-        const tempCard = document.createElement("div");
-        tempCard.className = "movie-card";
-        tempCard.id = id;
-
-        tempCard.innerHTML = `
-            <img src="${img_url}" alt="영화이미지">
-            <div class="text_area">
-                <h3>${movie_title}</h3>
-                <p>${overview}</p>
-                <span>평점 : ${vote}</span>
-            </div>
-          `;
-
-        const tempButton = document.createElement("span");
-        tempButton.className = "material-symbols-outlined saveButton";
-
-        if (saveMovieIDArray.includes(String(id))) {
-          tempButton.classList.add("saved");
-        }
-
-        tempButton.style.fontSize = "36px";
-        tempButton.innerText = "favorite";
-
-        tempButton.addEventListener("click", saveButtonEvent);
-
-        tempCard.appendChild(tempButton);
-        tempCard.addEventListener("click", moveToDetail);
-        document.getElementById("movie-container").appendChild(tempCard);
+        createMovieCard(id, movie_title, img_url, overview, vote);
       });
     });
   });
 }
 
+const movieContainer = document.getElementById("movie-container");
+const createMovieCard = (id, title, posterPath, overview, vote) => {
+  const tempCard = document.createElement("div");
+  tempCard.className = "movie-card";
+  tempCard.id = id;
+  tempCard.innerHTML = `
+      <img src="${posterPath}" alt="영화이미지">
+      <div class="text_area">
+          <h3>${title}</h3>
+          <p>${overview}</p>
+          <span>평점 : ${vote}</span>
+      </div>
+    `;
+
+  const tempButton = document.createElement("span");
+  tempButton.className = "material-symbols-outlined saveButton";
+
+  if (saveMovieIDArray.includes(String(id))) {
+    tempButton.classList.add("saved");
+  }
+
+  tempButton.style.fontSize = "36px";
+  tempButton.innerText = "favorite";
+
+  tempButton.addEventListener("click", saveButtonEvent);
+  tempCard.appendChild(tempButton);
+
+  tempCard.addEventListener("click", moveToDetail);
+  movieContainer.appendChild(tempCard);
+};
+
 // selectbox 부분
 function getMovieDataForId(id) {
   console.log(id);
+  movieContainer.innerHTML = "";
   let temp_html = ``;
 
   // 평점 높은 순
@@ -87,6 +92,7 @@ function getMovieDataForId(id) {
     let topratedMovie = movie_list.sort(function (a, b) {
       return b.vote_average - a.vote_average;
     });
+
     console.log(topratedMovie);
     topratedMovie.forEach(function (movie) {
       let img_url = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
@@ -94,18 +100,9 @@ function getMovieDataForId(id) {
       let overview = movie.overview;
       let vote = movie.vote_average;
       let id = movie.id;
-      temp_html += `
-            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
-                <img src="${img_url}" alt="영화이미지">
-                <div class="text_area">
-                  <h3>${movie_title}</h3>
-                  <p>${overview}</p>
-                  <span>평점 : ${vote}</span>
-                </div>
-            </div>
-          `;
+
+      createMovieCard(id, movie_title, img_url, overview, vote);
     });
-    document.getElementById("movie-container").innerHTML = temp_html;
   } else if (id === "low_rated") {
     // 평점 낮은 순
     let lowratedMovie = movie_list.sort(function (a, b) {
@@ -118,18 +115,8 @@ function getMovieDataForId(id) {
       let overview = movie.overview;
       let vote = movie.vote_average;
       let id = movie.id;
-      temp_html += `
-            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
-                <img src="${img_url}" alt="영화이미지">
-                <div class="text_area">
-                  <h3>${movie_title}</h3>
-                  <p>${overview}</p>
-                  <span>평점 : ${vote}</span>
-                </div>
-            </div>
-          `;
+      createMovieCard(id, movie_title, img_url, overview, vote);
     });
-    document.getElementById("movie-container").innerHTML = temp_html;
   } else if (id === "now_playing") {
     // 최신순
     let nowplayMovie = movie_list.sort(function (a, b) {
@@ -142,18 +129,8 @@ function getMovieDataForId(id) {
       let overview = movie.overview;
       let vote = movie.vote_average;
       let id = movie.id;
-      temp_html += `
-            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
-                <img src="${img_url}" alt="영화이미지">
-                <div class="text_area">
-                  <h3>${movie_title}</h3>
-                  <p>${overview}</p>
-                  <span>평점 : ${vote}</span>
-                </div>
-            </div>
-          `;
+      createMovieCard(id, movie_title, img_url, overview, vote);
     });
-    document.getElementById("movie-container").innerHTML = temp_html;
   }
 }
 // top_rated id 찾음
