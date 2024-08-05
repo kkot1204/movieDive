@@ -3,14 +3,15 @@ const options = {
   headers: {
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YjJlOWIyZWNkMmI1MDIwN2YzMWU2NzFhMDU3NzRmNSIsIm5iZiI6MTcyMTkxNjYxOC43MTM4NTgsInN1YiI6IjY2YTI1YWMxY2EyMzA4N2I0YWNmODgwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k8F1VMfOMPodILUqqlXGQXrOEgkbQGiJ8w_vnWFM_nE",
-  },
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YjJlOWIyZWNkMmI1MDIwN2YzMWU2NzFhMDU3NzRmNSIsIm5iZiI6MTcyMTkxNjYxOC43MTM4NTgsInN1YiI6IjY2YTI1YWMxY2EyMzA4N2I0YWNmODgwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.k8F1VMfOMPodILUqqlXGQXrOEgkbQGiJ8w_vnWFM_nE"
+  }
 };
+
+let movie_list;
 
 function getMovieData(searchText) {
   console.log("sss", searchText);
-  let url =
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+  let url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
   // 검색어가 있을 경우에는 검색 관련 url을 붙여준다.
   if (searchText) {
@@ -26,7 +27,7 @@ function getMovieData(searchText) {
   // fetch를 통한 데이터 가져오기 + 카드 그려주는 로직
   fetch(url, options).then((response) => {
     response.json().then((response) => {
-      let movie_list = response["results"];
+      movie_list = response["results"];
       console.log(response);
       let temp_html = ``;
       movie_list.forEach((i) => {
@@ -44,7 +45,6 @@ function getMovieData(searchText) {
                   <p>${overview}</p>
                   <span>평점 : ${vote}</span>
                 </div>
-                
             </div>
           `;
         document.getElementById("movie-container").innerHTML = temp_html;
@@ -52,6 +52,93 @@ function getMovieData(searchText) {
     });
   });
 }
+
+// selectbox 부분
+function getMovieDataForId(id) {
+  console.log(id);
+  // let url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+  let temp_html = ``; //
+  if (id === "top_rated") {
+    let topratedMovie = movie_list.sort(function (a, b) {
+      return b.vote_average - a.vote_average;
+    });
+    console.log(topratedMovie);
+    topratedMovie.forEach(function (movie) {
+      let img_url = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+      let movie_title = movie.title;
+      let overview = movie.overview;
+      let vote = movie.vote_average;
+      let id = movie.id;
+      temp_html += `
+            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
+                <img src="${img_url}" alt="영화이미지">
+                <div class="text_area">
+                  <h3>${movie_title}</h3>
+                  <p>${overview}</p>
+                  <span>평점 : ${vote}</span>
+                </div>
+            </div>
+          `;
+    });
+    document.getElementById("movie-container").innerHTML = temp_html;
+  } else if (id === "low_rated") {
+    let lowratedMovie = movie_list.sort(function (a, b) {
+      return a.vote_average - b.vote_average;
+    });
+    console.log(lowratedMovie);
+    lowratedMovie.forEach(function (movie) {
+      let img_url = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+      let movie_title = movie.title;
+      let overview = movie.overview;
+      let vote = movie.vote_average;
+      let id = movie.id;
+      temp_html += `
+            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
+                <img src="${img_url}" alt="영화이미지">
+                <div class="text_area">
+                  <h3>${movie_title}</h3>
+                  <p>${overview}</p>
+                  <span>평점 : ${vote}</span>
+                </div>
+            </div>
+          `;
+    });
+    document.getElementById("movie-container").innerHTML = temp_html;
+  } else if (id === "now_playing") {
+    let nowplayMovie = movie_list.sort(function (a, b) {
+      return a.release_date - b.release_date;
+    });
+    console.log(nowplayMovie);
+    nowplayMovie.forEach(function (movie) {
+      let img_url = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+      let movie_title = movie.title;
+      let overview = movie.overview;
+      let vote = movie.vote_average;
+      let id = movie.id;
+      temp_html += `
+            <div class="movie-card" id="${id}" onclick="alert('영화 ID: ${id}')">
+                <img src="${img_url}" alt="영화이미지">
+                <div class="text_area">
+                  <h3>${movie_title}</h3>
+                  <p>${overview}</p>
+                  <span>평점 : ${vote}</span>
+                </div>
+            </div>
+          `;
+    });
+    document.getElementById("movie-container").innerHTML = temp_html;
+  }
+}
+// top_rated id 찾음
+document.getElementById("top_rated").addEventListener("click", function () {
+  getMovieDataForId("top_rated");
+});
+document.getElementById("low_rated").addEventListener("click", function () {
+  getMovieDataForId("low_rated");
+});
+document.getElementById("now_playing").addEventListener("click", function () {
+  getMovieDataForId("now_playing");
+});
 
 //기본적으로 getMovieData를 호출하여 기본 디폴트 화면을 표시해줌
 getMovieData();

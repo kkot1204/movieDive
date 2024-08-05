@@ -100,50 +100,62 @@ section h2 {
   margin-top: 90px;
 }
 
-.select {
-  /* width: 100%; */
-  max-width: 1900px;
-  text-align: center;
-  margin: 80px auto 0 auto;
-}
-
-.select-wrap {
-  color: white;
-  width: 200px;
+.selectbox {
+  position: relative;
+  width: 150px;
+  height: 35px;
+  border-radius: 4px;
   border: 1px solid #fff;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 12px 13px;
-  font-size: 14px;
-  background: url(../img/Vector.png) 92% no-repeat; /*화살표 이미지 삽입*/
-  appearance: none;
-  text-align: center;
+  background: url(../img/Vector.png) calc(100% - 10px) center no-repeat;
+  /* background-size: 20px; */
+  cursor: pointer;
 }
 
-.select-listbox {
-  width: 200px;
-  list-style: none;
+.selectbox .selectbutton {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  border: 0 none;
+  outline: 0 none;
+  padding-left: 15px;
   background: transparent;
-  border: 1px solid #fff;
-  box-sizing: border-box;
-  border-radius: 8px;
-  text-align: center;
-  margin: 9px auto 0 auto;
-  /* display: none; */
+  color: #fff;
+  cursor: pointer;
 }
 
-.select-list {
-  border: none;
-  background-color: transparent;
-  color: white;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  padding: 7px 10px;
-  margin: 5px 7px;
-  box-sizing: border-box;
+.selectbox .optionlist {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.3s ease-in;
+}
+
+.selectbox.active .optionlist {
+  max-height: 500px;
+  border: 1px solid #fff;
+}
+
+.selectbox .optionitem {
+  padding: 5px 15px 5px;
+  transition: 0.1s;
+}
+
+.selectbox .optionitem:hover {
+  background: #fff;
+  color: #000;
+}
+
+.selectbox .optionitem:last-child {
+  border-bottom: 0 none;
 }
 
 #movie-container {
