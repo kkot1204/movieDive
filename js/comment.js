@@ -1,7 +1,8 @@
+import { updateReviewMovie } from "./myMovies.js";
 // Firebase 앱을 초기화하는 모듈을 가져오기
 
 // Firebase 앱을 초기화하기 위한 함수 가져오기
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 // Firestore DB 및 관련 기능들을 가져오기
 import {
   getFirestore,
@@ -11,9 +12,9 @@ import {
   doc,
   updateDoc,
   deleteDoc
-} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 // 사용자 인증 관련 함수 가져오기
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 
 // Firebase프로젝트의 설정 정보
 const firebaseConfig = {
@@ -110,6 +111,9 @@ $(document).ready(function () {
         userEmail: userEmail, // 로그인한 사용자 이메일
         timestamp: timestamp // 댓글 작성 시간
       });
+
+      await updateReviewMovie(movieID, true);
+
       loadComments(); // 댓글 새로고침
     } else {
       alert("로그인 후 이용해주세요");
@@ -140,9 +144,15 @@ async function deleteComment(commentId) {
       // 사용자가 로그인한 경우
       const commentRef = doc(firestoreDB, "review", commentId);
       await deleteDoc(commentRef);
+      await updateReviewMovie(movieID, false);
       loadComments(); // 댓글 새로고침
     } else {
       alert("로그인 후 이용해주세요");
     }
   }
 }
+
+// 테스트용
+const params = new URLSearchParams(window.location.search);
+const movieID = params.get("movie");
+console.log(movieID);

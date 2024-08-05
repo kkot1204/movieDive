@@ -38,7 +38,9 @@
   width: 300px;
   justify-self: center;
   cursor: pointer;
-  box-shadow: 0px 7px 36px -11px white, 0px 10px 15px -3px rgb(131 117 117 / 10%);
+  box-shadow:
+    0px 7px 36px -11px white,
+    0px 10px 15px -3px rgb(131 117 117 / 10%);
   overflow: hidden;
   border-radius: 15px;
 
@@ -73,13 +75,23 @@
   top: 10px;
   right: 10px;
   user-select: none;
+  text-shadow: 0px 0px 3px black !important;
 
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 .saved {
   color: #ca0000 !important;
-  font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 24;
+  text-shadow: none !important;
+  font-variation-settings:
+    "FILL" 100,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 .logoutButton {

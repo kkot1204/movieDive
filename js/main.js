@@ -68,6 +68,7 @@ async function getMovieData(searchText) {
         tempButton.addEventListener("click", saveButtonEvent);
 
         tempCard.appendChild(tempButton);
+        tempCard.addEventListener("click", moveToDetail);
         document.getElementById("movie-container").appendChild(tempCard);
       });
     });
@@ -126,6 +127,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+const moveToDetail = (event) => {
+  if (event.target.classList.contains("saveButton")) return;
+  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
+};
 
 function picture() {
   let userPicture = document.getElementById("moveToMyMoviesButton");
