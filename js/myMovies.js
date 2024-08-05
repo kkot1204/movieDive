@@ -132,6 +132,9 @@ export const saveButtonEvent = async (event) => {
  */
 export const updateReviewMovie = async (movieID, isAddReview) => {
   if (!userID || userID === "null") return;
+
+  let userInfo = await getDoc(docRef);
+  reviewMovieIDArray = userInfo.data().reviewMovies;
   if (isAddReview) {
     // 리뷰 등록하는 경우
     reviewMovieIDArray.push(movieID);
