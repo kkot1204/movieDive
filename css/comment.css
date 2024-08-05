@@ -88,6 +88,14 @@
   cursor: pointer;
 }
 
+.commentWarp {
+  display: flex;
+}
+
+.commentSubmit {
+  margin-left: 5px;
+}
+
 #logoutButton {
   background-color: transparent;
   color: white;
