@@ -80,16 +80,20 @@ const reviewedMoviesSection = document.querySelector(".reviewedMovies");
 async function showUserMovies() {
   await getUserMovies();
 
-  if (window.location.href.includes("myMovies")) {
-    updateMyMovieSection(saveMovieInfoArray);
-    updateMyMovieSection(reviewMovieInfoArray);
-  }
+  if (saveMovieIDArray.length === 0) savedMoviesSection.firstElementChild.classList.remove("hidden");
+  if (reviewMovieIDArray.length === 0) reviewedMoviesSection.firstElementChild.classList.remove("hidden");
+  updateMyMovieSection(saveMovieInfoArray);
+  updateMyMovieSection(reviewMovieInfoArray);
 }
 
-showUserMovies();
+if (window.location.href.includes("myMovies")) showUserMovies();
 
 /** 찜하기 버튼 클릭시 발생할 이벤트 콜백함수 */
 export const saveButtonEvent = async (event) => {
+  if (userID === "null") {
+    alert("회원가입/로그인을 먼저 해주세요!");
+    return;
+  }
   event.currentTarget.classList.toggle("saved");
   const selectedMovieID = event.currentTarget.parentElement.id;
   if (event.currentTarget.classList.contains("saved")) {
@@ -102,6 +106,24 @@ export const saveButtonEvent = async (event) => {
 
   await updateDoc(docRef, { saveMovies: saveMovieIDArray });
   if (window.location.href.includes("myMovies")) location.reload(true);
+};
+
+/** 리뷰 등록, 삭제시 firestore 업데이트
+ * @param isAddReview - 리뷰 등록하는 경우 true, 삭제하는 경우 false
+ */
+export const updateReviewMovie = async (isAddReview) => {
+  if (userID === "null") return;
+
+  let reviewedMovieID; // TODO: 지영님 기능 보고 맞춰서 받아오기
+  if (isReview) {
+    // 리뷰 등록하는 경우
+    reviewMovieIDArray.push(reviewedMovieID);
+  } else {
+    // 리뷰 삭제하는 경우
+    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != reviewedMovieID);
+  }
+
+  await updateDoc(docRef, { reviewMovies: reviewMovieIDArray });
 };
 
 /** 영화 정보 배열을 받아 interestMovies 내부 요소들을 구성한다.
