@@ -75,6 +75,7 @@
   top: 10px;
   right: 10px;
   user-select: none;
+  text-shadow: 0px 0px 3px black !important;
 
   font-variation-settings:
     "FILL" 0,
@@ -85,6 +86,7 @@
 
 .saved {
   color: #ca0000 !important;
+  text-shadow: none !important;
   font-variation-settings:
     "FILL" 100,
     "wght" 400,
