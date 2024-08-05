@@ -110,11 +110,10 @@ section h2 {
 }
 
 .selectbox {
-  float: right;
-  margin-right: 10px;
+  margin: 0 27px 0 auto;
   position: relative;
   width: 150px;
-  height: 35px;
+  height: 45px;
   border-radius: 4px;
   border: 1px solid #fff;
   background: url(../image/Vector.png) calc(100% - 10px) center no-repeat;
@@ -133,11 +132,12 @@ section h2 {
   background: transparent;
   color: #fff;
   cursor: pointer;
+  font-size: medium;
 }
 
 .selectbox .optionlist {
   position: absolute;
-  top: 2.5rem;
+  top: 3.5rem;
   left: 0;
   width: 100%;
   background: transparent;
@@ -148,15 +148,17 @@ section h2 {
   overflow: hidden;
   max-height: 0;
   transition: 0.3s ease-in;
+  z-index: 10;
 }
 
 .selectbox.active .optionlist {
   max-height: 500px;
   border: 1px solid #fff;
+  font-size: medium;
 }
 
 .selectbox .optionitem {
-  padding: 5px 15px 5px;
+  padding: 15px;
   transition: 0.1s;
 }
 

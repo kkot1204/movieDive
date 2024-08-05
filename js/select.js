@@ -1,5 +1,6 @@
 const selectButton = document.querySelector(".selectbutton");
 const selectOptions = document.querySelectorAll(".optionitem");
+
 // 클릭한 옵션의 텍스트를 selectbutton 안에 넣음
 const handleSelect = function (item) {
   selectButton.innerHTML = item.textContent;
@@ -19,11 +20,3 @@ selectButton.addEventListener("click", function () {
     selectButton.parentNode.classList.add("active");
   }
 });
-
-// sort  함수로  정렬?
-// 부여한 id값이 클릭이 됐는지 확인
-// 클릭시 tmdb api 관련을 fetch로 불러옴
-
-// document.getElementById("top").addEventListener("click", function () {
-//   console.log("topclick");
-// });
