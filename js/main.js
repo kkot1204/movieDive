@@ -67,6 +67,8 @@ async function getMovieData(searchText) {
 
         tempButton.addEventListener("click", saveButtonEvent);
 
+        // main에서 movieCard클릭 시 detail.html으로 이동
+        tempCard.addEventListener("click", moveToDetail);
         tempCard.appendChild(tempButton);
         document.getElementById("movie-container").appendChild(tempCard);
       });
@@ -126,3 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// main에서 movieCard클릭 시 detail.html으로 이동
+const moveToDetail = (event) => {
+  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
+};

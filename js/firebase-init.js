@@ -1,7 +1,17 @@
 // firebase 세팅값
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCmulI1n7YvyAtOtQumYNa5IaaPvEddBvQ",
@@ -18,4 +28,18 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestoreDB = getFirestore(app);
 
-export { auth, firestoreDB };
+export {
+  auth,
+  firestoreDB,
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  getAuth,
+  onAuthStateChanged
+};
