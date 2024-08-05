@@ -50,3 +50,18 @@
   line-height: 150%;
   font-size: 18px;
 }
+
+.moveToSignUpPageButton,
+.moveToLoginPageButton,
+.logoutButton {
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.navButtons button {
+  display: none;
+}
