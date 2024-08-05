@@ -5,6 +5,7 @@
   font-size: 20px;
   display: flex;
   justify-content: center;
+  font-family: "S-CoreDream-3Light";
 }
 .comment_container > div {
   width: 50%;

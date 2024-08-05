@@ -2,6 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 
 html,
 body,
@@ -109,6 +110,7 @@ section {
 body {
   line-height: 1;
   background-color: black;
+  font-family: "Playfair Display", serif;
 }
 ol,
 ul {
@@ -169,3 +171,5 @@ nav {
   width: inherit;
 }
 /* common nav css End*/
+
+/* font-family: "Playfair Display", serif; */
