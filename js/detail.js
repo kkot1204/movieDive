@@ -60,6 +60,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
   setInterval(picture, 1000);
 });
 
+/* 재헌 추가 시작 */
+document.addEventListener("DOMContentLoaded", function () {
+  const loginButton = document.querySelector(".moveToLoginPageButton");
+  const signUpButton = document.querySelector(".moveToSignUpPageButton");
+
+  // 로그인 및 회원가입 버튼 이벤트 리스너 설정
+  if (loginButton) {
+    loginButton.addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+  }
+
+  if (signUpButton) {
+    signUpButton.addEventListener("click", () => {
+      window.location.href = "signup.html";
+    });
+  }
+});
+
 // 이미지 파일 경로 배열
 const imageCount = 5; // 이미지 파일 수
 const imagePaths = [];
