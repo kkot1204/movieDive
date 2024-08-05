@@ -60,7 +60,7 @@ const createMovieCard = (id, title, posterPath, overview, vote) => {
       <div class="text_area">
           <h3>${title}</h3>
           <p>${overview}</p>
-          <span>평점 : ${vote}</span>
+          <span>평점 : ${vote.toFixed(1)}</span>
       </div>
     `;
 
