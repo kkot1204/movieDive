@@ -76,6 +76,13 @@ async function getMovieData(searchText) {
 
 //기본적으로 getMovieData를 호출하여 기본 디폴트 화면을 표시해줌
 getMovieData();
+
+// main의 영화 검색 시 해당 위치로 넘어가게
+function scrollSearchValue() {
+  const introduce = document.getElementById("movie_section");
+  window.scrollBy({ top: introduce.getBoundingClientRect().top, behavior: "smooth" });
+}
+
 // 서치 함수, 버튼 클릭 이벤트 쪽에서 onclick시 실행되도록 처리
 function search() {
   let text = document.getElementById("searchInput").value;
@@ -85,6 +92,7 @@ function search() {
 let searchBtn = document.getElementById("search_btn");
 searchBtn.onclick = () => {
   search();
+  scrollSearchValue();
 };
 
 // Enter serach //
@@ -93,6 +101,7 @@ document.querySelector(".searchInput").addEventListener("keydown", (event) => {
     event.preventDefault(); // 기본 Enter 키 동작 방지 (예: form 제출)
     const query = event.target.value;
     getMovieData(query);
+    scrollSearchValue();
   }
 });
 
