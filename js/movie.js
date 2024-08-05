@@ -56,8 +56,9 @@ function getMovieData(searchText) {
 // selectbox 부분
 function getMovieDataForId(id) {
   console.log(id);
-  // let url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
-  let temp_html = ``; //
+  let temp_html = ``;
+
+  // 평점 높은 순
   if (id === "top_rated") {
     let topratedMovie = movie_list.sort(function (a, b) {
       return b.vote_average - a.vote_average;
@@ -82,6 +83,7 @@ function getMovieDataForId(id) {
     });
     document.getElementById("movie-container").innerHTML = temp_html;
   } else if (id === "low_rated") {
+    // 평점 낮은 순
     let lowratedMovie = movie_list.sort(function (a, b) {
       return a.vote_average - b.vote_average;
     });
@@ -105,8 +107,9 @@ function getMovieDataForId(id) {
     });
     document.getElementById("movie-container").innerHTML = temp_html;
   } else if (id === "now_playing") {
+    // 최신순
     let nowplayMovie = movie_list.sort(function (a, b) {
-      return a.release_date - b.release_date;
+      return new Date(b.release_date) - new Date(a.release_date);
     });
     console.log(nowplayMovie);
     nowplayMovie.forEach(function (movie) {

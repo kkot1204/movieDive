@@ -101,6 +101,8 @@ section h2 {
 }
 
 .selectbox {
+  float: right;
+  margin-right: 10px;
   position: relative;
   width: 150px;
   height: 35px;
@@ -126,7 +128,7 @@ section h2 {
 
 .selectbox .optionlist {
   position: absolute;
-  top: 28px;
+  top: 2.5rem;
   left: 0;
   width: 100%;
   background: transparent;
