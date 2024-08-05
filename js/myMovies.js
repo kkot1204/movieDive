@@ -1,6 +1,6 @@
 import "./logoutstatus.js";
 import { firestoreDB } from "./firebase-init.js";
-import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // TODO: index.html 에도 myMovies로 이동할 클릭 이벤트 추가
 const moveToMyMoviesButton = document.querySelector("#moveToMyMoviesButton");
@@ -26,8 +26,15 @@ let reviewMovieInfoArray = [];
 /** 접속한 유저의 saveMovies, reviewMovies 받아오기 */
 export const getUserMovies = async () => {
   try {
-    if (!userID || userID === "null") return;
+    if (!userID || userID === "null") return; // 로그아웃한 경우, 로그인하지 않은 경우
     let userInfo = await getDoc(docRef);
+
+    // firestore에 존재하지 않는 경우 (ex. 이전에 만들어둔 게정)
+    if (!userInfo.exists()) {
+      await setDoc(doc(firestoreDB, "user", `${userID}`), { saveMovies: [], reviewMovies: [] });
+      userInfo = await getDoc(docRef);
+    }
+
     saveMovieIDArray = userInfo.data().saveMovies;
     reviewMovieIDArray = userInfo.data().reviewMovies;
 
