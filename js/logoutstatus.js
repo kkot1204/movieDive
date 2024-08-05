@@ -8,16 +8,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const logoutButton = document.getElementById("logoutButton");
   const myMoviesButton = document.getElementById("moveToMyMoviesButton");
 
-  // Firebase Auth 인증 상태 감지
+  // 모든 버튼을 숨긴 상태에서 인증 상태에 따라 버튼을 표시
+  if (loginButton) loginButton.style.display = "none";
+  if (signUpButton) signUpButton.style.display = "none";
+  if (logoutButton) logoutButton.style.display = "none";
+  if (myMoviesButton) myMoviesButton.style.display = "none";
+
+  const userLoggedIn = localStorage.getItem("userLoggedIn");
+
+  if (userLoggedIn === "true") {
+    if (loginButton) loginButton.style.display = "none";
+    if (signUpButton) signUpButton.style.display = "none";
+    if (logoutButton) logoutButton.style.display = "block";
+    if (myMoviesButton) myMoviesButton.style.display = "block";
+  } else {
+    if (loginButton) loginButton.style.display = "block";
+    if (signUpButton) signUpButton.style.display = "block";
+    if (logoutButton) logoutButton.style.display = "none";
+    if (myMoviesButton) myMoviesButton.style.display = "none";
+  }
+
+  // Firebase Auth 상태 감지
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // 로그인 상태
+      localStorage.setItem("userLoggedIn", "true");
       if (loginButton) loginButton.style.display = "none";
       if (signUpButton) signUpButton.style.display = "none";
       if (logoutButton) logoutButton.style.display = "block";
       if (myMoviesButton) myMoviesButton.style.display = "block";
     } else {
-      // 로그아웃 상태
+      localStorage.setItem("userLoggedIn", "false");
       if (loginButton) loginButton.style.display = "block";
       if (signUpButton) signUpButton.style.display = "block";
       if (logoutButton) logoutButton.style.display = "none";
