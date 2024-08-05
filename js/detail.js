@@ -36,9 +36,9 @@ async function fetchMovieDetails() {
 function displayMovieDetails(data) {
   document.querySelector(".movie-image").src = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
   document.querySelector(".movie-title").textContent = data.title;
-  document.querySelector(
-    ".movie-info"
-  ).textContent = `${data.release_date} | ${data.runtime}분 | 평점: ${data.vote_average}`;
+  document.querySelector(".movie-info").textContent = `${data.release_date} | ${
+    data.runtime
+  }분 | 평점: ${data.vote_average.toFixed(1)}`;
   document.querySelector(".movie-description").textContent = data.overview;
 }
 

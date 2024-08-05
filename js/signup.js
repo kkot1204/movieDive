@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Signed in
           const user = userCredential.user;
           localStorage.setItem("userID", user.uid);
-          await setDoc(doc(firestoreDB, "user", `${user.uid}`), { saveMovies: [], reviewMovies: [] });
+          await setDoc(doc(firestoreDB, "user", `${user.uid}`), { saveMovies: [], reviewMovies: {} });
         })
         .then(() => (window.location.href = "/index.html"))
         .catch((error) => {

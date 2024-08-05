@@ -31,12 +31,13 @@ export const getUserMovies = async () => {
 
     // firestore에 존재하지 않는 경우 (ex. 이전에 만들어둔 게정)
     if (!userInfo.exists()) {
-      await setDoc(doc(firestoreDB, "user", `${userID}`), { saveMovies: [], reviewMovies: [] });
+      await setDoc(doc(firestoreDB, "user", `${userID}`), { saveMovies: [], reviewMovies: {} });
       userInfo = await getDoc(docRef);
     }
 
     saveMovieIDArray = userInfo.data().saveMovies;
-    reviewMovieIDArray = userInfo.data().reviewMovies;
+    reviewMovieIDArray = Object.keys(userInfo.data().reviewMovies);
+    console.log("reviewMovieID: ", reviewMovieIDArray);
 
     for (let movieID of saveMovieIDArray) {
       const url = `https://api.themoviedb.org/3/movie/${movieID}?`;
@@ -137,10 +138,11 @@ export const updateReviewMovie = async (movieID, isAddReview) => {
   reviewMovieIDArray = userInfo.data().reviewMovies;
   if (isAddReview) {
     // 리뷰 등록하는 경우
-    reviewMovieIDArray.push(movieID);
+    reviewMovieIDArray[`${movieID}`] = !reviewMovieIDArray[`${movieID}`] ? 1 : reviewMovieIDArray[`${movieID}`] + 1;
   } else {
     // 리뷰 삭제하는 경우
-    reviewMovieIDArray = reviewMovieIDArray.filter((id) => id != movieID);
+    reviewMovieIDArray[`${movieID}`] -= 1;
+    if (reviewMovieIDArray[`${movieID}`] === 0) delete reviewMovieIDArray[`${movieID}`];
   }
 
   await updateDoc(docRef, { reviewMovies: reviewMovieIDArray });

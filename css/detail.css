@@ -47,9 +47,8 @@
 }
 
 .movie-description {
-  width: 60%;
   line-height: 150%;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .moveToSignUpPageButton,
