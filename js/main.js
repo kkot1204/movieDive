@@ -178,6 +178,11 @@ document.querySelector(".searchInput").addEventListener("keydown", (event) => {
 // myMovie 페이지로 이동할 수 있는 버튼 이벤트 설정
 setToMyMoviesButtonEvent();
 
+const moveToDetail = (event) => {
+  if (event.target.classList.contains("saveButton")) return;
+  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
+};
+
 /* 재헌 추가 시작 부분 */
 document.addEventListener("DOMContentLoaded", function () {
   const loginButton = document.querySelector(".moveToLoginPageButton");
@@ -197,11 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-const moveToDetail = (event) => {
-  if (event.target.classList.contains("saveButton")) return;
-  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
-};
-
 function picture() {
   let userPicture = document.getElementById("moveToMyMoviesButton");
   let randomColor =
@@ -209,11 +209,44 @@ function picture() {
     Math.floor(Math.random() * 16777215)
       .toString(16)
       .padStart(6, "0");
+
   userPicture.style.backgroundColor = randomColor;
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
   picture();
-  // Optionally, you can set the color change to happen periodically
-  setInterval(picture, 1000); // change color every 3 seconds
+  setInterval(picture, 1000);
+});
+
+// 이미지 파일 경로 배열
+const imageCount = 5; // 이미지 파일 수
+const imagePaths = [];
+
+for (let i = 1; i <= imageCount; i++) {
+  imagePaths.push(`image/${i}.png`);
+}
+
+// 랜덤 이미지 불러오기 함수
+function getRandomImage() {
+  const randomIndex = Math.floor(Math.random() * imagePaths.length);
+  return imagePaths[randomIndex];
+}
+
+// 기존 이미지 제거
+while (randomImageElement.firstChild) {
+  randomImageElement.removeChild(randomImageElement.firstChild);
+}
+
+// DOMContentLoaded 이벤트 리스너
+document.addEventListener("DOMContentLoaded", () => {
+  const randomImageElement = document.getElementById("moveToMyMoviesButton");
+  const randomImagePath = getRandomImage();
+
+  const imgElement = document.createElement("img");
+  imgElement.src = randomImagePath;
+  imgElement.alt = "Random Image";
+  imgElement.width = 42; // 너비 설정
+  imgElement.height = 42; // 높이 설정
+
+  randomImageElement.appendChild(imgElement);
 });

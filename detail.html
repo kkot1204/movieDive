@@ -1,74 +1,68 @@
 <!DOCTYPE html>
 
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/comment.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/comment.css" />
-  <link rel="stylesheet" href="css/detail.css">
+  <body>
+    <header id="header">
+      <nav>
+        <h2><a href="index.html">Top Movie</a></h2>
+        <div class="navButtons">
+          <button id="logoutButton">로그아웃</button>
+          <button id="moveToMyMoviesButton" onClick="window.location.href='./myMovies.html'"></button>
+        </div>
+      </nav>
+    </header>
+    <!-- 꽃봄님 시작 -->
+    <section class="demo1">
+      <article class="movie-poster">
+        <img class="movie-image" src="" alt="" />
 
-</head>
-
-<body>
-  <header id="header">
-    <nav>
-      <h2><a href="index.html">Top Movie</a></h2>
-      <div class="navButtons">
-        <button id="logoutButton">로그아웃</button>
-        <button id="moveToMyMoviesButton" onClick="window.location.href='./myMovies.html'"></button>
-      </div>
-    </nav>
-  </header>
-  <!-- 꽃봄님 시작 -->
-  <section class="demo1">
-    <article class="movie-poster">
-      <img class="movie-image"
-        src="" alt="" />
-
-      <div class="movie-content">
-        <div class="movie-box">
-          <h1 class="movie-title">스타워즈: 라스트 제다이</h1>
-          <p class="movie-info">2017년 | 12세 | 152분 |</p>
-          <p class="movie-description">
-            악의 세력인 무자비한 ‘퍼스트 오더’가 은하계를 장악한 시대. 레아 장군이 이끄는 저항군은 승리의 불씨를 지필 마지막 희망을 찾아 ‘레이’를 과거의 영웅 ‘루크’에게 보낸다. 루크를 통해 자신
-            안에 잠들어 있던 특별한 힘을 깨닫게 된 레이는 뜻밖에 퍼스트 오더의 실세 ‘카일로 렌’과도 교감하게 되는데…
-          </p>
-
+        <div class="movie-content">
+          <div class="movie-box">
+            <h1 class="movie-title">스타워즈: 라스트 제다이</h1>
+            <p class="movie-info">2017년 | 12세 | 152분 |</p>
+            <p class="movie-description">
+              악의 세력인 무자비한 ‘퍼스트 오더’가 은하계를 장악한 시대. 레아 장군이 이끄는 저항군은 승리의 불씨를 지필
+              마지막 희망을 찾아 ‘레이’를 과거의 영웅 ‘루크’에게 보낸다. 루크를 통해 자신 안에 잠들어 있던 특별한 힘을
+              깨닫게 된 레이는 뜻밖에 퍼스트 오더의 실세 ‘카일로 렌’과도 교감하게 되는데…
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+    <!-- 꽃봄님 끝-->
+    <!-- 지영 시작 -->
+    <div class="comment_container">
+      <div>
+        <form>
+          <fieldset>
+            <legend>댓글 쓰기</legend>
+          </fieldset>
+          <!-- <input type="text" id="nicknameInput" placeholder="닉네임 입력" /> -->
+          <input type="text" id="commentInput" placeholder="리뷰를 작성해주세요" />
+          <button id="commentSubmit">등록</button>
+        </form>
+        <div class="comment_list_wrap">
+          <ul>
+            <!-- 댓글 리스트가 여기 추가됩니다 -->
+          </ul>
         </div>
       </div>
-    </article>
-
-  </section>
-  <!-- 꽃봄님 끝-->
-  <!-- 지영 시작 -->
-  <div class="comment_container">
-    <div>
-      <form>
-        <fieldset>
-          <legend>댓글 쓰기</legend>
-        </fieldset>
-        <!-- <input type="text" id="nicknameInput" placeholder="닉네임 입력" /> -->
-        <input type="text" id="commentInput" placeholder="리뷰를 작성해주세요" />
-        <button id="commentSubmit">등록</button>
-      </form>
-      <div class="comment_list_wrap">
-        <ul>
-          <!-- 댓글 리스트가 여기 추가됩니다 -->
-        </ul>
-      </div>
     </div>
-  </div>
-  <!-- 지영 끝 -->
+    <!-- 지영 끝 -->
 
-  <script type="module" src="js/firebase-init.js"></script>
-  <script type="module" src="js/comment.js"></script>
-  <script type="module" src="js/logoutstatus.js"></script>
-  <script type="module" src="js/detail.js"></script>
-</body>
-
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/comment.js"></script>
+    <script type="module" src="js/logoutstatus.js"></script>
+    <script type="module" src="js/detail.js"></script>
+  </body>
 </html>
-
