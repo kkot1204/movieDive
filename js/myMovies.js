@@ -153,8 +153,14 @@ const updateMyMovieSection = (movieInfoArray) => {
     tempButton.addEventListener("click", saveButtonEvent);
 
     tempCard.appendChild(tempButton);
+    tempCard.addEventListener("click", moveToDetail);
 
     const movieSection = movieInfoArray === saveMovieInfoArray ? savedMoviesSection : reviewedMoviesSection;
     movieSection.appendChild(tempCard);
   });
+};
+
+const moveToDetail = (event) => {
+  if (event.target.classList.contains("saveButton")) return;
+  window.location.href = `./detail.html?movie=${encodeURIComponent(event.currentTarget.id)}`;
 };
