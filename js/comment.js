@@ -112,7 +112,17 @@ $(document).ready(function () {
   $("#commentSubmit").click(async function (event) {
     event.preventDefault();
     let content = $("#commentInput").val();
-    let timestamp = new Date().toISOString();
+    // 현재 시간을 'YYYY-MM-DD HH:mm' 형식으로 변환
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = String(now.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1
+    let day = String(now.getDate()).padStart(2, "0");
+    let hours = String(now.getHours()).padStart(2, "0");
+    let minutes = String(now.getMinutes()).padStart(2, "0");
+    let timestamp = `${year}-${month}-${day} ${hours}:${minutes}`; // 원하는 형식으로 조합
+
+    const params = new URLSearchParams(window.location.search);
+    const movieID = params.get("movie"); // URL에서 movieID 불러오기
 
     if (userEmail) {
       // 사용자가 로그인한 경우
